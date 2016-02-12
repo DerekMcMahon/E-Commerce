@@ -56,6 +56,9 @@
 
 }
 
+html, body {
+	height: 100%;
+}
 
 
 
@@ -63,8 +66,8 @@
 header{
 	width: 100%;
 	height: 100px;
-	/*background: #f4c995;*/
-	background-color: rgba(255, 255, 255, .1);
+	background-color: rgba(255, 255, 255, 0.0);
+	/*background: #F3575D;*/
 	position: fixed;
 	z-index: 9999;
 }
@@ -103,8 +106,12 @@ header nav ul li a:hover{
 /*  Billboard  */
 .billboard{
 	width: 100%;
-	height: 600px;
-	background: #ffffff url('../img/billboard_bg.jpg') no-repeat fixed;
+	height: 100%;
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.4), 
+      rgba(0, 0, 0, 0.4)
+    ), url('https://static.pexels.com/photos/6488/sunglasses-hand-smartphone-desk.jpg') no-repeat;
+	background-size: cover;
 }
 
 
@@ -140,11 +147,11 @@ header nav ul li a:hover{
 
 /*  Services  */
 .services{
-	margin-bottom: 80px;
+	padding-bottom: 80px
 }
 
 .services .S_icons{
-	margin-top: -80px;
+	margin-top: 80px;
 	padding-left: 64px;
 	margin-bottom: 30px;
 }
@@ -340,7 +347,7 @@ header nav ul li a:hover{
 .newsletter{
 	width: 100%;
 	height: 180px;
-	background: #eba151 url('../img/newsletter_pat.png') repeat;
+	background: #eba151 url('../img/newsletter_pat_old.png') repeat;
 	background-position: 0 -20px;
 	overflow: hidden;
 	position: relative;

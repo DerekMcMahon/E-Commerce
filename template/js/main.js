@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
 	var WinHeight = $('.billboard').height() - 100;
-	var BgColor = 'rgba(255, 255, 255, .1)';
-	var DarkBgColor = 'rgba(238, 169, 89, .9)';
+	var BgColor = 'rgba(255, 255, 255, 0.0)';
+	var DarkBgColor = 'rgba(243, 87, 93, 0.9)';
 	
 	$(window).scroll(function () {
 	    if ($(window).scrollTop() < WinHeight) {
