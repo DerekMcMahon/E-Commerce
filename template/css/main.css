@@ -56,6 +56,9 @@
 
 }
 
+html, body {
+	height: 100%;
+}
 
 
 
@@ -63,8 +66,8 @@
 header{
 	width: 100%;
 	height: 100px;
-	/*background: #f4c995;*/
-	background-color: rgba(255, 255, 255, .1);
+	background-color: rgba(255, 255, 255, 0.0);
+	/*background: #F3575D;*/
 	position: fixed;
 	z-index: 9999;
 }
@@ -103,8 +106,12 @@ header nav ul li a:hover{
 /*  Billboard  */
 .billboard{
 	width: 100%;
-	height: 600px;
-	background: #ffffff url('../img/billboard_bg.jpg') no-repeat fixed;
+	height: 100%;
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.4), 
+      rgba(0, 0, 0, 0.4)
+    ), url('../img/sunglasses-hand-smartphone-desk-line.jpg') no-repeat;
+	background-size: cover;
 }
 
 
@@ -140,11 +147,11 @@ header nav ul li a:hover{
 
 /*  Services  */
 .services{
-	margin-bottom: 80px;
+	padding-top: 80px;
+	padding-bottom: 80px
 }
 
 .services .S_icons{
-	margin-top: -80px;
 	padding-left: 64px;
 	margin-bottom: 30px;
 }
@@ -154,13 +161,32 @@ header nav ul li a:hover{
 	width: 230px;
 	height: 10px;
 	border: 0;
-	background: url('../img/separator.png') no-repeat;
 	margin-bottom: 75px;
+	margin-left: -4px;
+	background: url('../img/separator.png') no-repeat;
+}
+
+.services .icon-div {
+	width: 160px;
+	height: 160px;
+	display: inline-block;
+	border-radius: 50%;
 	margin-left: -4px;
 }
 
-.services img{
-	margin-left: -4px;
+.services .locked {
+	background: #555555 url('../img/locked.png') no-repeat center;
+	background-size: 80px 80px;
+}
+
+.services .burn {
+	background: #555555 url('../img/burn.png') no-repeat center;
+	background-size: 80px 80px;
+}
+
+.services .monitor {
+	background: #555555 url('../img/monitor.png') no-repeat center;
+	background-size: 80px 80px;
 }
 
 .services .desc{
@@ -174,7 +200,7 @@ header nav ul li a:hover{
 	width: 235px;
 	height: auto;
 	text-align: center;
-	margin-right: 155px;
+	margin-right: 165px;
 }
 
 .services .desc li:first-child{
@@ -258,16 +284,16 @@ header nav ul li a:hover{
 	-webkit-border-radius: 2px;
 	-o-border-radius: 2px;
 
-	background-color: #eba151;
+	background-color: #FF5722;
 
-	box-shadow: 0 3px 0 #cd8335;
-	-moz-box-shadow: 0 3px 0 #cd8335;
-	-webkit-box-shadow: 0 3px 0 #cd8335;
-	-o-box-shadow: 0 3px 0 #cd8335;
+	box-shadow: 0 3px 0 #E54E1F;
+	-moz-box-shadow: 0 3px 0 #E54E1F;
+	-webkit-box-shadow: 0 3px 0 #E54E1F;
+	-o-box-shadow: 0 3px 0 #E54E1F;
 }
 
 .call_to_action a.cta_btn:hover{
-	background: #e69b4c;
+	background: #FF6230;
 }
 
 .client_testimonials{
@@ -340,7 +366,7 @@ header nav ul li a:hover{
 .newsletter{
 	width: 100%;
 	height: 180px;
-	background: #eba151 url('../img/newsletter_pat.png') repeat;
+	background: #eba151 url('../img/newsletter_pat_old.png') repeat;
 	background-position: 0 -20px;
 	overflow: hidden;
 	position: relative;
@@ -442,7 +468,7 @@ header nav ul li a:hover{
 /*  Footer  */
 footer{
 	width: 100%;
-	padding: 80px 0;
+	padding: 40px 0;
 	background-color: #393939;
 	text-align: center;
 }
@@ -454,7 +480,7 @@ footer nav{
 footer nav ul li{
 	list-style: none;
 	display: inline-block;
-	margin: 40px 0 20px 0;
+	margin: 0px 0 20px 0;
 }
 
 footer nav ul li a{
