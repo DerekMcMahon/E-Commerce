@@ -1,0 +1,25 @@
+
+/* About Us */
+/* Override header CSS to show color */
+header {
+	width: 100%;
+	height: 100px;
+	background-color: rgba(255, 87, 34, 0.9);
+	position: fixed;
+	z-index: 9999;
+}
+
+.about-us {
+	width:100%;
+	background-color: #ffffff;
+	padding-top: 120px;
+	padding-bottom: 20px;
+}
+
+.about-us p {
+	font-family: 'LatoRegular', arial;
+	color: #7e7e7e;
+	font-size: 16px;
+	letter-spacing: .5px;
+	line-height: 25px;
+}

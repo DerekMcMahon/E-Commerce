@@ -58,6 +58,7 @@
 
 html, body {
 	height: 100%;
+	background-color: #393939;
 }
 
 
@@ -148,6 +149,8 @@ header nav ul li a:hover{
 
 /*  Services  */
 .services{
+	width: 100%;
+	background: #ffffff;
 	padding-top: 80px;
 	padding-bottom: 80px
 }
@@ -235,7 +238,6 @@ header nav ul li a:hover{
 	height: 460px;
 	background-color: #f7f7f7;
 	overflow: hidden;
-	margin-bottom: 80px;
 }
 
 .call_to_action img{
@@ -297,8 +299,12 @@ header nav ul li a:hover{
 	background: #FF6230;
 }
 
-.client_testimonials{
+/*  Testimonials  */
 
+.client_testimonials{
+	width: 100%;
+	padding-top: 80px;
+	background: #ffffff;
 }
 
 .client_testimonials h3{
@@ -311,10 +317,6 @@ header nav ul li a:hover{
 	margin-bottom: 60px;
 }
 
-
-
-
-/*  Testimonials  */
 
 .testimonials{
 	display: inline-block;
@@ -360,111 +362,6 @@ header nav ul li a:hover{
 	bottom: -30px;
 	right: 0;
 }
-
-
-
-/*  Newsletter  */
-.newsletter{
-	width: 100%;
-	height: 180px;
-	background: #eba151 url('../img/newsletter_pat_old.png') repeat;
-	background-position: 0 -20px;
-	overflow: hidden;
-	position: relative;
-}
-
-.newsletter p{
-	width: 330px;
-	color: #fff;
-	font-family: "LatoBold", arial;
-	font-size: 35px;
-	font-weight: bold;
-	text-transform: uppercase;
-	float: left;
-	margin-top: 50px;
-	line-height: 40px;
-}
-
-.newsletter .sub_form{
-	float: right;
-	margin-top: 57px;
-	width: 600px;
-	height: 62px;
-	background: #ffffff;
-	border-radius: 100px;
-	border: 2px #e19646 solid;
-}
-
-.newsletter .email_field,
-.newsletter .name_field{
-	border: none;
-	outline: none;
-	background: #ffffff;
-	width: 180px;
-	height: 60px;
-	padding: 0 20px;
-	color: #949494;
-	font-family: "LatoRegular", arial;
-	font-size: 14px;
-
-}
-
-
-.newsletter .email_field::-webkit-input-placeholder,
-.newsletter .name_field::-webkit-input-placeholder {
-   color: #d3d2d2;
-}
-
-.newsletter .email_field:-moz-placeholder ,/* Firefox 18- */
-.newsletter .name_field:-moz-placeholder { /* Firefox 18- */
-   color: #d3d2d2;  
-}
-
-.newsletter .email_field::-moz-placeholder , /* Firefox 19+ */
-.newsletter .name_field::-moz-placeholder {  /* Firefox 19+ */
-   color: #d3d2d2;  
-}
-
-.newsletter .email_field:-ms-input-placeholder,  
-.newsletter .name_field:-ms-input-placeholder {  
-   color: #d3d2d2;  
-} 
-
-.newsletter .email_field{
-	border-top-left-radius: 100px;
-	border-bottom-left-radius: 100px;
-	border-right: 1px #e4e4e4 solid; 
-}
-
-.newsletter .name_field{
-	padding-right: 0; 
-}
-
-.newsletter .submit_nl{
-	height: 40px;
-	padding: 0 40px;
-	border: 0;
-	color: #fdfdfd;
-	font-family: "LatoBold", arial;
-	font-size: 17px;
-	font-weight: bold;
-	background-color: #575351;
-	float: right;
-	margin-right: 10px;
-	margin-top: 11px;
-	outline: none;
- 
-	border-radius: 20px;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-}
-
-.newsletter .submit_nl:hover{
-	cursor: pointer;
-	background: #4f4c49;
-}
-
-
 
 /*  Footer  */
 footer{
