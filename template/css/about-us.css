@@ -16,6 +16,22 @@ header {
 	padding-bottom: 20px;
 }
 
+.about-us .wrapper {
+	min-height: 390px;
+}
+
+.about-us h3{
+	color: #636363;
+	font-family: "LatoBold", arial;
+	font-size: 30px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.about-us img {
+	float: right;
+}
+
 .about-us p {
 	font-family: 'LatoRegular', arial;
 	color: #7e7e7e;
