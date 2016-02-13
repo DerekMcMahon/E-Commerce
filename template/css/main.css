@@ -244,9 +244,9 @@ header nav ul li a:hover{
 }
 
 .call_to_action img{
-	width: 578px;
-	margin-top: 73px;
-	margin-left: -99px;
+	width: 500px;
+	margin-top: 50px;
+	margin-left: -60px;
 	float: left;
 }
 .call_to_action .cta_desc{
@@ -299,7 +299,7 @@ header nav ul li a:hover{
 }
 
 .call_to_action a.cta_btn:hover{
-	background: #FF6230;
+	background: #3399ff;
 }
 
 /*  Testimonials  */
