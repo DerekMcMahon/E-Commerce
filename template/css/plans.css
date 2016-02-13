@@ -9,6 +9,32 @@ Primary style
   box-sizing: border-box;
 }
 
+#pricing_plans {
+  border: 1px solid white;
+  background-color: #f7f7f7;
+  margin: 0 0 -50px 0;
+}
+
+#pricing_plans li {
+  list-style-type: none;
+}
+
+#pricing_plans h2 {
+  padding-top: 10px;
+}
+
+#pricing_plan_title {
+  text-align: center;
+  font-family: 'LatoBold', arial;
+  font-weight: bold;
+  color: #646363;
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: 50px;
+  margin-bottom: -50px;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -28,6 +54,14 @@ body {
 a {
   color: #e97d68;
   text-decoration: none;
+}
+
+#pricing_plans a {
+  transition: box-shadow 0.25s;
+}
+
+#pricing_plans a:hover {
+  box-shadow: 1px 1px 5px 1px grey;
 }
 
 /* -------------------------------- 
@@ -340,6 +374,7 @@ Main Components
 }
 
 .cd-pricing-footer {
+  background-color: #FFFFFF;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -348,6 +383,7 @@ Main Components
   height: 80px;
   width: 100%;
 }
+
 .cd-pricing-footer::after {
   /* right arrow visible on mobile */
   content: '';

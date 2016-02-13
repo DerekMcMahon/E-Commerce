@@ -1,0 +1,90 @@
+
+/* About Us */
+/* Override header CSS to show color */
+header {
+	width: 100%;
+	height: 100px;
+	background-color: rgba(102, 178, 255, 0.9);
+	position: fixed;
+	z-index: 9999;
+}
+
+.about-us {
+	width:100%;
+	background-color: #ffffff;
+	padding-top: 145px;
+	padding-bottom: 20px;
+}
+
+.about-us .wrapper {
+	min-height: 640px;
+}
+
+.about-us h3{
+	color: #636363;
+	width: 100%;
+	font-family: "LatoBold", arial;
+	font-size: 30px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.about-us img {
+	width: 96%;
+	height: auto;
+	margin-left: 4%;
+	margin-bottom: 20px;
+}
+
+.about-us p {
+	font-family: 'LatoRegular', arial;
+	color: #7e7e7e;
+	font-size: 16px;
+	letter-spacing: .5px;
+	line-height: 25px;
+	margin-bottom: 10px;
+}
+
+.split-left {
+	float: left;
+	display: inline-block;
+	width: 50%;
+	padding-right: 40px;
+}
+.split-right {
+	float: right;
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+}
+
+.about-us a.cta_btn{
+	padding: 15px 40px;
+	display: inline-block;
+	color: #fff;
+	font-family: "LatoBold", arial;
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-decoration: none;
+
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-o-border-radius: 2px;
+
+	background-color: #66b2ff;
+
+	box-shadow: 0 3px 0 #3399ff;
+	-moz-box-shadow: 0 3px 0 #3399ff;
+	-webkit-box-shadow: 0 3px 0 #3399ff;
+	-o-box-shadow: 0 3px 0 #3399ff;
+
+	transition: background-color 0.5s;
+}
+
+.about-us a.cta_btn:hover{
+	background-color: #FF6230;
+}

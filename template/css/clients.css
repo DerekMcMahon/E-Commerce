@@ -1,0 +1,12 @@
+
+#client_images {
+	margin: -30px auto 0 auto;
+	padding-bottom: 25px;
+
+	border-collapse: separate;
+	border-spacing: 30px;
+}
+
+.client_testimonials h3 {
+	margin-top: 20px;
+}
