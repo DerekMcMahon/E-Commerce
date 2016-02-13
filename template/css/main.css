@@ -372,6 +372,7 @@ footer{
 	padding: 40px 0;
 	background-color: #393939;
 	text-align: center;
+	clear: both;
 }
 
 footer nav{

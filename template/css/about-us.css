@@ -17,19 +17,24 @@ header {
 }
 
 .about-us .wrapper {
-	min-height: 390px;
+	min-height: 640px;
 }
 
 .about-us h3{
 	color: #636363;
+	width: 100%;
 	font-family: "LatoBold", arial;
 	font-size: 30px;
 	font-weight: bold;
 	text-transform: uppercase;
+	margin-bottom: 10px;
 }
 
 .about-us img {
-	float: right;
+	width: 96%;
+	height: auto;
+	margin-left: 4%;
+	margin-bottom: 20px;
 }
 
 .about-us p {
@@ -38,4 +43,41 @@ header {
 	font-size: 16px;
 	letter-spacing: .5px;
 	line-height: 25px;
+	margin-bottom: 10px;
+}
+
+.split-left {
+	float: left;
+	display: inline-block;
+	width: 50%;
+}
+.split-right {
+	float: right;
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+}
+
+.about-us a.cta_btn{
+	padding: 15px 40px;
+	display: inline-block;
+	color: #fff;
+	font-family: "LatoBold", arial;
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-decoration: none;
+
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-o-border-radius: 2px;
+
+	background-color: #FF5722;
+
+	box-shadow: 0 3px 0 #E54E1F;
+	-moz-box-shadow: 0 3px 0 #E54E1F;
+	-webkit-box-shadow: 0 3px 0 #E54E1F;
+	-o-box-shadow: 0 3px 0 #E54E1F;
 }
