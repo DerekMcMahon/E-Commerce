@@ -284,12 +284,12 @@ header nav ul li a:hover{
 	-webkit-border-radius: 2px;
 	-o-border-radius: 2px;
 
-	background-color: #FF5722;
+	background-color: #66b2ff;
 
-	box-shadow: 0 3px 0 #E54E1F;
-	-moz-box-shadow: 0 3px 0 #E54E1F;
-	-webkit-box-shadow: 0 3px 0 #E54E1F;
-	-o-box-shadow: 0 3px 0 #E54E1F;
+	box-shadow: 0 3px 0 #3399ff;
+	-moz-box-shadow: 0 3px 0 #3399ff;
+	-webkit-box-shadow: 0 3px 0 #3399ff;
+	-o-box-shadow: 0 3px 0 #3399ff;
 }
 
 .call_to_action a.cta_btn:hover{
@@ -317,16 +317,11 @@ header nav ul li a:hover{
 
 .testimonials{
 	display: inline-block;
-	width: 260px;
 	height: auto;
-	background: #f9f8f8;
 	position: relative;
-	padding: 30px 20px;
-	margin-right: 76px;
-	margin-bottom: 120px;
-	color: #909090;
-	font-family: "LatoRegular", arial;
-	font-size: 16px;
+	padding: 0px 0px;
+	margin-right: 110px;
+	margin-bottom: 25px;
 	line-height: 20px;
 }
 
