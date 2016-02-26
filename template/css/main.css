@@ -244,9 +244,9 @@ header nav ul li a:hover{
 }
 
 .call_to_action img{
-	width: 578px;
-	margin-top: 73px;
-	margin-left: -99px;
+	width: 500px;
+	margin-top: 50px;
+	margin-left: -60px;
 	float: left;
 }
 .call_to_action .cta_desc{
@@ -299,14 +299,14 @@ header nav ul li a:hover{
 }
 
 .call_to_action a.cta_btn:hover{
-	background: #FF6230;
+	background: #3399ff;
 }
 
 /*  Testimonials  */
 
 .client_testimonials{
 	width: 100%;
-	padding-top: 80px;
+	padding-top: 40px;
 	background: #ffffff;
 }
 
@@ -441,3 +441,17 @@ header nav ul li a,
 	-moz-transition: .2s linear;
 	-o-transition: .2s linear;
 }
+
+
+/* Navigation bar css */
+.main_nav a {
+	transition: color 0.5s;
+}
+
+.main_nav a:hover {
+	color: black;
+}
+
+
+
+

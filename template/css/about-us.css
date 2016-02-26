@@ -12,7 +12,7 @@ header {
 .about-us {
 	width:100%;
 	background-color: #ffffff;
-	padding-top: 120px;
+	padding-top: 145px;
 	padding-bottom: 20px;
 }
 
@@ -50,6 +50,7 @@ header {
 	float: left;
 	display: inline-block;
 	width: 50%;
+	padding-right: 40px;
 }
 .split-right {
 	float: right;
@@ -80,4 +81,10 @@ header {
 	-moz-box-shadow: 0 3px 0 #3399ff;
 	-webkit-box-shadow: 0 3px 0 #3399ff;
 	-o-box-shadow: 0 3px 0 #3399ff;
+
+	transition: background-color 0.5s;
+}
+
+.about-us a.cta_btn:hover{
+	background: #3399ff;
 }
