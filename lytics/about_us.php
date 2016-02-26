@@ -11,18 +11,7 @@
 </head>
 <body>
 
-	<header>
-		<div class="wrapper">
-			<a href="index.html"><img src="img/lytics-logo-white.png" class="h_logo" alt="" title=""></a>
-			<nav>
-				<ul class="main_nav">
-					<li class="current"><a href="index.html">Home</a></li>
-					<li class="current"><a href="">About Us</a></li>
-					<li><a href="#">Sign Up</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
+	<?php include("header.html") ?>
 
 	<section class="about-us">
 		<div class="wrapper">
@@ -34,21 +23,11 @@
 			</div>
 			<div class="split-right">
 				<img src="img/startup-photos.jpg" alt="" title="">
-				<a href="#" class="cta_btn">Sign Up Now!</a>
+				<a href="sign_up.php" class="cta_btn">Sign Up Now!</a>
 			</div>	
 		</div>
 	</section><!-- about-us end -->
 
-	<footer>
-		<nav>
-			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="">About Us</a></li>
-				<li><a href="#">Sign Up</a></li>
-			</ul>
-		</nav>
-		<hr class="footer_sp"/>
-		<p class="rights">© 2016 Lytics - All Rights Reserved - Template from <a href="http://pixelhint.com">Pixelhint.com</a>.</p>
-	</footer><!-- footer End -->
+	<?php include("footer.html") ?>
 
 </body>
