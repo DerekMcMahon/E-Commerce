@@ -74,6 +74,7 @@ function check_input(element) {
 				element.style.borderLeft = "6px solid red";
 				error.innerHTML = "invalid state acronym e.g. VA";
 				state_valid = false;
+				
 			} else {
 				element.style.borderLeft = "6px solid #40A46F";
 				error.innerHTML = "";
@@ -107,7 +108,7 @@ function check_input(element) {
 	}
 }
 
-function validate_submit() {
+function check_validate_submit() {
 	var success = true;
 	var error = null;
 
@@ -163,6 +164,40 @@ function validate_submit() {
 	}
 
 	return success;
+}
+
+function submit_form() {
+	var is_valid = check_validate_submit();
+
+	// If not valid, return false before creating POST
+	if (!is_valid) {
+		return false;
+	}
+
+	var post_data = {}
+	post_data.first_name = $("input[name=first_name]").val();
+	post_data.last_name = $("input[name=last_name]").val();
+	post_data.email = $("input[name=email]").val();
+	post_data.password = $("input[name=password]").val();
+	// password and password check must be the same, so only send one
+	post_data.address = $("input[name=address]").val();
+	post_data.city = $("input[name=city]").val();
+	post_data.state = $("input[name=state]").val();
+	post_data.zip_code = $("input[name=zip_code]").val();
+
+	$.post("script_sign_up.php", post_data, function(data) {
+		var data = JSON.parse(data);
+		if (data.status === "success") {
+			window.location = 'sign_up_confirm.php';
+
+		} else if (data.status === "error") {
+			alert(data.message);
+			$("#email_error").text(data.message);
+		}
+
+	});
+
+	return false;
 }
 
 
