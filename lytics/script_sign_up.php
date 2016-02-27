@@ -7,24 +7,26 @@
 
 	if (!isset($_POST["first_name"]) ||	!isset($_POST["last_name"]) || !isset($_POST["email"]) ||
 		!isset($_POST["password"]) || !isset($_POST["address"]) || !isset($_POST["city"]) ||
-		!isset($_POST["state"]) || !isset($_POST["zip_code"]) || !isset($_POST["plan_type"])) {
-		echo "Invalid POST data";
+		!isset($_POST["state"]) || !isset($_POST["zip_code"])) {
+		// echo "Invalid POST data";
+		print_r($_POST);
 		exit(1);
 	}
 
 	# Get data from POST
-	$firstName = $_POST["first_name"];
-	$lastName = $_POST["last_name"];
-	$email = $_POST["email"];
-	$rawPassword = $_POST["password"];
+	# Lowercase all data for consistency
+	$firstName = strtolower($_POST["first_name"]);
+	$lastName = strtolower($_POST["last_name"]);
+	$email = strtolower($_POST["email"]);
+	$rawPassword = strtolower($_POST["password"]);
 	$hashedPassword = hash("sha256", $rawPassword, false);
-	$address = $_POST["address"];
-	$city = $_POST["city"];
-	$state = $_POST["state"];
-	$zipCode = $_POST["zip_code"];
+	$address = strtolower($_POST["address"]);
+	$city = strtolower($_POST["city"]);
+	$state = strtolower($_POST["state"]);
+	$zipCode = strtolower($_POST["zip_code"]);
 	$planType = "";
 	if (isset($_POST["plan_type"])) {
-		$planType = $_POST["plan_type"];
+		$planType = strtolower($_POST["plan_type"]);
 	} else {
 		$planType = "basic"; 
 	}
@@ -55,6 +57,14 @@
 	$userInsertStmt->close();
 	$userDetailInsertStmt->close();
 
+	// Start a session
+	session_start();
+
+	$_SESSION["first_name"] = ucwords($firstName, " ");
+	$_SESSION["last_name"] = ucwords($lastName, " ");
+	$_SESSION["email"] = $email;
+
+	// 
 	$response["status"] = "success";
 	echo json_encode($response);
 ?>

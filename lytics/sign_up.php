@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Signup for Lytics</title>
+	<title>Sign Up for Lytics</title>
 	<meta charset="utf-8">
 	<meta name="author" content="pixelhint.com">
 
@@ -9,9 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/sign_up.css">
 
-	<script type="text/javascript" src="js/sign_up.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="js/sign_up.js"></script>
 </head>
 
 
@@ -23,7 +23,7 @@
 		<div class="wrapper">
 
 			<h2>Signup</h2>
-			<form method="POST" onsubmit="return validate_submit();" id="sign_up_form">
+			<form method="POST" onsubmit="return submit_form();" id="sign_up_form">
 				<table>
 					<tr>
 						<td><input type="text" class="label" name="first_name"  placeholder="first name" onblur="check_input(this)"></td>
