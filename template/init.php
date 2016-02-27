@@ -2,7 +2,7 @@
 	# Assumes database created with name 'ecommerce-project'
 	$db = new mysqli('localhost', 'root', '', 'ecommerce-project');
 	if ($db->connect_error) {
-		die ("Could not connect to ");
+		die ("Could not connect to database");
 	}
 
 	# Drop any tables if they exist
@@ -14,7 +14,7 @@
 	echo "Creating new tables...</br>";
 	# User info table
 	$db->query("CREATE TABLE Users (id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-		email VARCHAR(100) NOT NULL,
+		email VARCHAR(100) NOT NULL UNIQUE,
 		password CHAR(64) NOT NULL,
 		plan_type ENUM('basic', 'popular', 'premium')
 		)") or die("Failed to make 'users' table") or die("Error " . $db->error);
