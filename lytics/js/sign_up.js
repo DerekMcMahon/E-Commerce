@@ -31,11 +31,30 @@ $(document).ready(function() {
 	var planTypes = ["Basic", "Popular", "Premium"];
 	var planSelect = $("select[name=plan_type]");
 	$(planTypes).each(function(index, val) {
-		planSelect.append($("<option>", {value: val, html: val}));
+		planSelect.append($("<option>", {value: val.toLowerCase(), html: val}));
 	});
 
+	// Set plan type from get param if present
+	var urlPlanParam = get_url_plan();
+	if (urlPlanParam != null) {
+		planSelect.val(urlPlanParam);
+	}
+
+	// Set focus to first name text box
+	$("input[name=first_name]").focus();
 
 });
+
+function get_url_plan() {
+	var pageUrl = window.location.href;
+	var plan_type = new RegExp('[\?&]plan=([^&#\/]*)').exec(pageUrl);
+	if (plan_type == null) {
+		return null;
+	} else {
+		return plan_type[1];
+	}
+
+}
 
 function set_select_border(element) {
 	element.style.borderLeft = "6px solid #40A46F";

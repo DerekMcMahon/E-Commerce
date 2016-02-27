@@ -46,7 +46,7 @@
 	$userInsertStmt->execute();
 	if ($db->errno == 1062) {	// 1062 = error for duplicate user
 		$response["status"] = "error";
-		$response["message"] = "Email '$email' is already registered";
+		$response["message"] = "'$email' is already registered";
 		echo json_encode($response);
 		exit(0);
 	}

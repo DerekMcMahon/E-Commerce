@@ -60,7 +60,7 @@
 			<section class="cta_desc">
 				<h3>We make good websites great.</h3>
 				<p style = "font-size: 25px">After 3 months of using our product, our clients averaged a 20% increase in website revenue. Don't leave money on the table.</p>
-				<a href="#" class="cta_btn">Sign Up Today!</a>
+				<a href="sign_up.php" class="cta_btn">Sign Up Today!</a>
 			</section>
 		</div>
 	</section><!-- call_to_action End -->
@@ -114,7 +114,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href=#>Select</a>
+						<a class="cd-select" href="sign_up.php?plan=basic">Select</a>
 					</footer> <!-- .cd-pricing-footer -->
 				</li>
 				<li class="cd-popular">
@@ -139,7 +139,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href=#>Select</a>
+						<a class="cd-select" href="sign_up.php?plan=popular">Select</a>
 					</footer> <!-- .cd-pricing-footer -->
 				</li>
 				<li>
@@ -164,7 +164,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href=#>Select</a>
+						<a class="cd-select" href="sign_up.php?plan=premium">Select</a>
 					</footer>  <!-- .cd-pricing-footer -->
 				</li>
 			</ul> <!-- .cd-pricing-list -->
