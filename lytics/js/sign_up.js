@@ -4,8 +4,42 @@ var email_valid = false;
 var password_valid = false;
 var address_valid = false;
 var city_valid = false;
-var state_valid = false;
+var state_valid = true;
 var zip_valid = false;
+
+$(document).ready(function() {
+	// Set state dropdown
+	var states = [
+		"AL", "AK", "AZ", "AR", "CA",
+		"CO", "CT", "DE", "DC", "FL",
+		"GA", "HI", "ID", "IL", "IN",
+		"IA", "KS", "KY", "LA", "ME",
+		"MD", "MA", "MI", "MN", "MS",
+		"MO", "MT", "NE", "NV", "NH",
+		"NJ", "NM", "NY", "NC", "ND",
+		"OH", "OK", "OR", "PA", "RI",
+		"SC", "SD", "TN", "TX", "UT",
+		"VT", "VA", "WA", "WV", "WI",
+		"WY"
+	];
+	var stateSelect = $("select[name=state]");
+	$(states).each(function(index, val) {
+		stateSelect.append($("<option>", {value: val, html: val}));
+	});
+
+	// Set plan type dropdowns
+	var planTypes = ["Basic", "Popular", "Premium"];
+	var planSelect = $("select[name=plan_type]");
+	$(planTypes).each(function(index, val) {
+		planSelect.append($("<option>", {value: val, html: val}));
+	});
+
+
+});
+
+function set_select_border(element) {
+	element.style.borderLeft = "6px solid #40A46F";
+}
 
 function check_input(element) {
 	
@@ -58,22 +92,7 @@ function check_input(element) {
 		} else if (element.name == "city") {
 			city_valid = true;
  
-		} else if (element.name == "state") {
-			var re = /[A-Z]{2}/;
-			var check = re.test(element.value);
-			var error = document.getElementById("state_zip_error");
-
-			if (!check) {
-				element.style.borderLeft = "6px solid red";
-				error.innerHTML = "invalid state";
-			} else {
-				element.style.borderLeft = "6px solid #40A46F";
-				error.innerHTML = "";
-				state_valid = true;
-			}
-
 		} else if (element.name == "zip_code") {
-
  			zip_valid = true;
 
 		}
@@ -156,8 +175,9 @@ function submit_form() {
 	// password and password check must be the same, so only send one
 	post_data.address = $("input[name=address]").val();
 	post_data.city = $("input[name=city]").val();
-	post_data.state = $("input[name=state]").val();
+	post_data.state = $("select[name=state]").val();
 	post_data.zip_code = $("input[name=zip_code]").val();
+	post_data.plan_type = $("select[name=plan_type]").val();
 
 	$.post("script_sign_up.php", post_data, function(data) {
 		var data = JSON.parse(data);
@@ -165,7 +185,6 @@ function submit_form() {
 			window.location = 'sign_up_confirm.php';
 
 		} else if (data.status === "error") {
-			alert(data.message);
 			$("#email_error").text(data.message);
 		}
 

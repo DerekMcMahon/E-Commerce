@@ -26,6 +26,9 @@
 			<form method="POST" onsubmit="return submit_form();" id="sign_up_form">
 				<table>
 					<tr>
+						<td class="section-title">Name</td>
+					</tr>
+					<tr>
 						<td><input type="text" class="label" name="first_name"  placeholder="first name" onblur="check_input(this)"></td>
 						<td><input type="text" class="label" name="last_name" placeholder="last name" onblur="check_input(this)"></td>
 						<td><div id="name_error" class="error"></div></td>
@@ -34,14 +37,15 @@
 					<tr></tr>
 
 					<tr>
+						<td class="section-title">Account Info</td>
+					</tr>
+					<tr>
 						<td colspan="2"><input type="text" class="label_2" name="email" onblur="check_input(this)" placeholder="email@email.com"></td>
 						<td><div id="email_error" class="error"></div></td>
 					</tr>
-
 					<tr>
 						<td colspan="2"><input type="password" class="label_2" name="password" placeholder="password" onblur="check_input(this)"></td>
 					</tr>	
-
 					<tr>
 						<td colspan="2"><input type="password" class="label_2" name="password_check" placeholder="retype password" onblur="check_input(this)"></td>
 						<td><div id="pwd_error" class="error"></div></td>
@@ -50,16 +54,34 @@
 					<tr></tr>
 
 					<tr>
+						<td class="section-title">Address</td>
+					</tr>
+					<tr>
 						<td><input type="text" class="label" name="address" placeholder="address" onblur="check_input(this)"></td>
 						<td><input type="text" class="label" name="city" placeholder="city" onblur="check_input(this)"></td>
 						<td><div id="adr_city_error" class="error"></div></td>
 					</tr>
-
 					<tr>
-						<td><input type="text" class="label" name="state" placeholder="state" onblur="check_input(this)"></td>
+						<td>
+							<select class="label" name="state" onchange="set_select_border(this)">
+								<option value="" disabled select>Select State</option>
+							</select>
+						</td>
 						<td><input type="text" class="label" name="zip_code" placeholder="zip code" onblur="check_input(this)"></td>
 						<td><div id="state_zip_error" class="error"></div></td>
 					</tr>
+
+					<tr></tr>
+
+					<tr>
+						<td class="section-title">Billing</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<select class="label" name="plan_type" onchange="set_select_border(this)">
+								<option value="" disabled select>Select Plan Type</option>
+							</select>
+						</td>
 
 					<tr></tr>
 

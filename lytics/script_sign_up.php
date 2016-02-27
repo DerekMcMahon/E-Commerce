@@ -14,7 +14,7 @@
 	}
 
 	# Get data from POST
-	# Lowercase all data for consistency
+	# Lowercase all data (except state) for consistency
 	$firstName = strtolower($_POST["first_name"]);
 	$lastName = strtolower($_POST["last_name"]);
 	$email = strtolower($_POST["email"]);
@@ -22,7 +22,7 @@
 	$hashedPassword = hash("sha256", $rawPassword, false);
 	$address = strtolower($_POST["address"]);
 	$city = strtolower($_POST["city"]);
-	$state = strtolower($_POST["state"]);
+	$state = strtoupper($_POST["state"]);
 	$zipCode = strtolower($_POST["zip_code"]);
 	$planType = "";
 	if (isset($_POST["plan_type"])) {
