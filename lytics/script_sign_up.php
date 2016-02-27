@@ -40,7 +40,7 @@
 
 	// Bind parameters
 	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
-	$userDetailInsertStmt->bind_param("issssss", $userId, $firstName, $lastName, $address, $city, $state, $zip_code);
+	$userDetailInsertStmt->bind_param("issssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode);
 
 	// Execute the statements
 	$userInsertStmt->execute();
