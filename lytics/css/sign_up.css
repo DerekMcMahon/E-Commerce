@@ -58,6 +58,7 @@ span.term a:hover{
 	padding-left: 20px;
 	width: 300px;
 	color: red;
+	transition: all 0.3s ease-out;
 }
 
 .label{
