@@ -7,163 +7,196 @@ var city_valid = false;
 var state_valid = false;
 var zip_valid = false;
 
+var RED_BORDER = "6px solid red";
+var GREEN_BORDER = "6px solid #40A46F";
+
 //var fields = {"first_name", "last_name", }
 
-function check_input(element) {
-	
-	if (element.value != "") {
-		element.style.borderLeft = "6px solid #40A46F";
+function check_email() {
+	var email = document.getElementsByName("email")[0];
+	var error = document.getElementById("email_error");
+	var e_val = email.value.trim();
 
-		if (element.name == "first_name") {
-			document.getElementById("name_error").innerHTML = "";
-			f_name_valid = true;
+	if (e_val != "") {
+		var re = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+		var check = re.test(e_val);
 
-		} else if (element.name == "last_name") {
-			l_name_valid = true;
- 
-		}  else if (element.name == "email") {
-			var email_error = document.getElementById("email_error");
-			var re = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-			var check = re.test(element.value);
-
-			if (!check) {
-				element.style.borderLeft = "6px solid red";
-				email_error.innerHTML = "invalid email address";
-				email_valid = false;
-			} else {
-				element.style.borderLeft = "6px solid #40A46F";
-				email_error.innerHTML = "";
-				email_valid = true;
-			}
-
-		} else if (element.name == "password") {
-			var pwd_check = document.getElementsByName("password_check")[0];
-			var pwd_error = document.getElementById("pwd_error");
-
-			pwd_check.value = "";
-			pwd_check.style.borderLeft = "";
-			pwd_error.innerHTML = "";
-
-		} else if (element.name == "password_check") {
-			var pwd = document.getElementsByName("password")[0];
-			var pwd_error = document.getElementById("pwd_error");
-
-			if (pwd.value != element.value) {
-				element.style.borderLeft = "6px solid red";
-				pwd_error.innerHTML = "retyped address does not match";
-				password_valid = false;
-			} else {
-				pwd_error.innerHTML = "";
-				password_valid = true;
-			}
-		
-		} else if (element.name == "address") {
-			document.getElementById("adr_city_error").innerHTML = "";
-			address_valid = true;
-
-		} else if (element.name == "city") {
-			document.getElementById("adr_city_error").innerHTML = "";
-			city_valid = true;
- 
-		} else if (element.name == "state") {
-			var re = /[A-Z]{2}/;
-			var check = re.test(element.value);
-			var error = document.getElementById("state_zip_error");
-
-			if (!check) {
-				element.style.borderLeft = "6px solid red";
-				error.innerHTML = "invalid state acronym e.g. VA";
-				state_valid = false;
-				
-			} else {
-				element.style.borderLeft = "6px solid #40A46F";
-				error.innerHTML = "";
-				state_valid = true;
-			}
-
-		} else if (element.name == "zip_code") {
-			var re = /[0-9]{5,10}/;
-			var check = re.test(element.value);
-			var error = document.getElementById("state_zip_error");
-
-			if (!check) {
-				element.style.borderLeft = "6px solid red";
-				error.innerHTML = "invalid zip code";
-				zip_valid = false;
-			} else {
-				element.style.borderLeft = "6px solid #40A46F";
-				error.innerHTML = "";
-				zip_valid = true;
-			}
-
+		if (check) {
+			error.innerHTML = "";
+			email.style.borderLeft = GREEN_BORDER;
+			return true;
+		} else {
+			error.innerHTML = "invalid email";
+			email.style.borderLeft = RED_BORDER;
+			return false;
 		}
 
 	} else {
-		var name = element.name;
-		if (name == "first_name"|| name == "last_name")
-			document.getElementById("name_error").innerHTML = "";
+		error.innerHTML = "please enter email";
+		email.style.borderLeft = RED_BORDER;
+	}
+	return false;
+}
 
+function check_names() {
+	var f_name = document.getElementsByName("first_name")[0];
+	var l_name = document.getElementsByName("last_name")[0];
+	var error = document.getElementById("name_error");
 
-		element.style.borderLeft = "";
+	var f_val = f_name.value.trim();
+	var l_val = l_name.value.trim();
+
+	if (f_val == "" || l_val == "") {
+		error.innerHTML = "please enter name";
+		if (f_val == "")
+			f_name.style.borderLeft = RED_BORDER;
+		else
+			f_name.style.borderLeft = GREEN_BORDER;
+
+		if (l_val == "")
+			l_name.style.borderLeft = RED_BORDER;
+		else
+			l_name.style.borderLeft = GREEN_BORDER;
+		return false
+	} else {
+		error.innerHTML = "";
+		f_name.style.borderLeft = GREEN_BORDER;
+		l_name.style.borderLeft = GREEN_BORDER;
+		return true;
 	}
 }
 
+function check_password () {
+	var password = document.getElementsByName("password")[0];
+	var password_check = document.getElementsByName("password_check")[0];
+	var error = document.getElementById("pwd_error");
+
+	var p_val = password.value.trim();
+	var c_val = password_check.value.trim();
+
+	if (p_val == "" || c_val == ""){
+		error.innerHTML = "please enter password";
+		if (p_val == "")
+			password.style.borderLeft = RED_BORDER;
+		if (c_val == "")
+			password_check.style.borderLeft = RED_BORDER;
+		return false;
+
+	} else {
+
+		if (p_val != c_val) {
+			password.style.borderLeft = RED_BORDER;
+			password_check.style.borderLeft = RED_BORDER;
+			error.innerHTML = "retyped password does not match";
+			return false;
+		} else {
+			error.innerHTML = "";
+			password.style.borderLeft = GREEN_BORDER;
+			password_check.style.borderLeft = GREEN_BORDER;
+			return true;
+		}
+	}
+}
+
+function check_address_city () {
+	var address = document.getElementsByName("address")[0];
+	var city = document.getElementsByName("city")[0];
+	var error = document.getElementById("adr_city_error");	
+
+	var a_val = address.value.trim();
+	var c_val = city.value.trim();
+
+	if (a_val == "" || c_val == ""){
+		error.innerHTML = "please enter address/city";
+		if (a_val == "")
+			address.style.borderLeft = RED_BORDER;
+		if (c_val == "")
+			city.style.borderLeft = RED_BORDER;
+		return false;
+	} else {
+		error.innerHTML = "";
+		address.style.borderLeft = GREEN_BORDER;
+		city.style.borderLeft = GREEN_BORDER;
+		return true;
+	}
+}
+
+function check_state_zip () {
+	var state = document.getElementsByName("state")[0];
+	var zip = document.getElementsByName("zip_code")[0];
+	var error = document.getElementById("state_zip_error");	
+
+	var s_val = state.value.trim();
+	var z_val = zip.value.trim();
+
+	if (s_val == "" || z_val == "") {
+		error.innerHTML = "please enter state/zip code";
+		if (s_val == "")
+			state.style.borderLeft = RED_BORDER;
+		if (z_val == "")
+			zip.style.borderLeft = RED_BORDER;
+		return false;
+	} else {
+		var s_re = /[A-Z]{2}/;
+		var s_check = s_re.test(s_val);
+
+		if (!s_check) {
+			error.innerHTML = "invalid state";
+			state.style.borderLeft = RED_BORDER;
+			return false;
+		} else {
+			zip.style.borderLeft = GREEN_BORDER;
+		}
+
+		var z_re = /[0-9]{5,10}/;
+		var z_check = z_re.test(z_val);	
+		console.log(z_val);
+
+		if (!z_check) {
+			error.innerHTML = "invalid zip code";
+			zip.style.borderLeft = RED_BORDER;
+			return false;
+		} else {
+			state.style.borderLeft = GREEN_BORDER;
+		}
+
+		error.innerHTML = "";
+		return true;
+
+	}
+}
+
+function clear_pcheck() {
+	var password_check = document.getElementsByName("password_check")[0];
+	var error = document.getElementById("pwd_error");
+	password_check.style.borderLeft = "";
+	password_check.value = "";
+	error.innerHTML = ""
+}
+
+
+
 function check_validate_submit() {
+
 	var success = true;
-	var error = null;
 
-	if (!f_name_valid || !l_name_valid) {
-		success = false;
-		error = document.getElementById("name_error");
-		error.innerHTML = "please enter name";
-		if (!f_name_valid) {
-			document.getElementsByName("first_name")[0].style.borderLeft = "6px solid red";
-		}
-		if (!l_name_valid) {
-			document.getElementsByName("last_name")[0].style.borderLeft = "6px solid red";
-		}
-	} 
+	if (!check_names())
+		sucecss = false;
 
-	if (!email_valid) {
+	if (!check_email())
 		success = false;
-		error = document.getElementById("email_error");
-		error.innerHTML = "please enter email";
-		document.getElementsByName("email")[0].style.borderLeft = "6px solid red";
-	}
 
-	if (!password_valid) {
+	if (!check_password())
 		success = false;
-		error = document.getElementById("pwd_error");
-		error.innerHTML = "please enter valid password";
-		document.getElementsByName("password")[0].style.borderLeft = "6px solid red";
-		document.getElementsByName("password_check")[0].style.borderLeft = "6px solid red";
-	}
 
-	if (!address_valid || !city_valid) {
+	if (!check_address_city())
 		success = false;
-		error = document.getElementById("adr_city_error");
-		error.innerHTML = "please enter valid address or city";
-		if (!address_valid) {
-			document.getElementsByName("address")[0].style.borderLeft = "6px solid red";
-		}
-		if (!city_valid) {
-			document.getElementsByName("city")[0].style.borderLeft = "6px solid red";
-		}
-	}
 
-	if (!state_valid || !zip_valid) {
+	if (!check_state_zip())
 		success = false;
-		error = document.getElementById("state_zip_error");
-		error.innerHTML = "please enter state or zip code";
-		if (!state_valid) {
-			document.getElementsByName("state")[0].style.borderLeft = "6px solid red";
-		}
-		if (!zip_valid) {
-			document.getElementsByName("zip_code")[0].style.borderLeft = "6px solid red";
-		}
-	}
 
 	return success;
+
 }
 
 function submit_form() {

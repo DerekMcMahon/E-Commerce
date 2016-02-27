@@ -26,38 +26,38 @@
 			<form method="POST" onsubmit="return submit_form();" id="sign_up_form">
 				<table>
 					<tr>
-						<td><input type="text" class="label" name="first_name"  placeholder="first name" onblur="check_input(this)"></td>
-						<td><input type="text" class="label" name="last_name" placeholder="last name" onblur="check_input(this)"></td>
+						<td><input type="text" class="label" name="first_name"  placeholder="first name"></td>
+						<td><input type="text" class="label" name="last_name" placeholder="last name"></td>
 						<td><div id="name_error" class="error"></div></td>
 					</tr>
 
 					<tr></tr>
 
 					<tr>
-						<td colspan="2"><input type="text" class="label_2" name="email" onblur="check_input(this)" placeholder="email@email.com"></td>
+						<td colspan="2"><input type="text" class="label_2" name="email" placeholder="email@email.com"></td>
 						<td><div id="email_error" class="error"></div></td>
 					</tr>
 
 					<tr>
-						<td colspan="2"><input type="password" class="label_2" name="password" placeholder="password" onblur="check_input(this)"></td>
+						<td colspan="2"><input type="password" class="label_2" name="password" placeholder="password" onblur="clear_pcheck()"></td>
 					</tr>	
 
 					<tr>
-						<td colspan="2"><input type="password" class="label_2" name="password_check" placeholder="retype password" onblur="check_input(this)"></td>
+						<td colspan="2"><input type="password" class="label_2" name="password_check" placeholder="retype password"></td>
 						<td><div id="pwd_error" class="error"></div></td>
 					</tr>
 
 					<tr></tr>
 
 					<tr>
-						<td><input type="text" class="label" name="address" placeholder="address" onblur="check_input(this)"></td>
-						<td><input type="text" class="label" name="city" placeholder="city" onblur="check_input(this)"></td>
+						<td><input type="text" class="label" name="address" placeholder="address"></td>
+						<td><input type="text" class="label" name="city" placeholder="city"></td>
 						<td><div id="adr_city_error" class="error"></div></td>
 					</tr>
 
 					<tr>
-						<td><input type="text" class="label" name="state" placeholder="state" onblur="check_input(this)"></td>
-						<td><input type="text" class="label" name="zip_code" placeholder="zip code" onblur="check_input(this)"></td>
+						<td><input type="text" class="label" name="state" placeholder="state"></td>
+						<td><input type="text" class="label" name="zip_code" placeholder="zip code"></td>
 						<td><div id="state_zip_error" class="error"></div></td>
 					</tr>
 
