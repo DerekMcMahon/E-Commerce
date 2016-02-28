@@ -81,6 +81,20 @@ span.term a:hover{
 	border-top: none;
 }
 
+.select {
+	border-radius: 0px;
+	-webkit-appearance: none;
+	cursor: pointer;
+}
+
+.section-title {
+	padding-left: 6px;
+}
+
+select {
+	width: 100%;
+}
+
 .label:hover, .label_2:hover, #active {
 	border-left: 6px solid #3498db;
 }

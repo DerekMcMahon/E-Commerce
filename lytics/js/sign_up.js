@@ -1,11 +1,3 @@
-var f_name_valid = false;
-var l_name_valid = false;
-var email_valid = false;
-var password_valid = false;
-var address_valid = false;
-var city_valid = false;
-var state_valid = false;
-var zip_valid = false;
 
 var RED_BORDER = "6px solid red";
 var GREEN_BORDER = "6px solid #40A46F";
@@ -36,6 +28,59 @@ function check_email() {
 		email.style.borderLeft = RED_BORDER;
 	}
 	return false;
+}
+
+$(document).ready(function() {
+	// Set state dropdown
+	var states = [
+		"AL", "AK", "AZ", "AR", "CA",
+		"CO", "CT", "DE", "DC", "FL",
+		"GA", "HI", "ID", "IL", "IN",
+		"IA", "KS", "KY", "LA", "ME",
+		"MD", "MA", "MI", "MN", "MS",
+		"MO", "MT", "NE", "NV", "NH",
+		"NJ", "NM", "NY", "NC", "ND",
+		"OH", "OK", "OR", "PA", "RI",
+		"SC", "SD", "TN", "TX", "UT",
+		"VT", "VA", "WA", "WV", "WI",
+		"WY"
+	];
+	var stateSelect = $("select[name=state]");
+	$(states).each(function(index, val) {
+		stateSelect.append($("<option>", {value: val, html: val}));
+	});
+
+	// Set plan type dropdowns
+	var planTypes = ["Basic", "Popular", "Premium"];
+	var planSelect = $("select[name=plan_type]");
+	$(planTypes).each(function(index, val) {
+		planSelect.append($("<option>", {value: val.toLowerCase(), html: val}));
+	});
+
+	// Set plan type from get param if present
+	var urlPlanParam = get_url_plan();
+	if (urlPlanParam != null) {
+		planSelect.val(urlPlanParam);
+	}
+
+	// Set focus to first name text box
+	$("input[name=first_name]").focus();
+
+});
+
+function get_url_plan() {
+	var pageUrl = window.location.href;
+	var plan_type = new RegExp('[\?&]plan=([^&#\/]*)').exec(pageUrl);
+	if (plan_type == null) {
+		return null;
+	} else {
+		return plan_type[1];
+	}
+
+}
+
+function set_select_border(element) {
+	element.style.borderLeft = GREEN_BORDER;
 }
 
 function check_names() {
@@ -110,8 +155,12 @@ function check_address_city () {
 		error.innerHTML = "please enter address/city";
 		if (a_val == "")
 			address.style.borderLeft = RED_BORDER;
+		else
+			address.style.borderLeft = GREEN_BORDER;
 		if (c_val == "")
 			city.style.borderLeft = RED_BORDER;
+		else
+			city.style.borderLeft = GREEN_BORDER;
 		return false;
 	} else {
 		error.innerHTML = "";
@@ -121,32 +170,44 @@ function check_address_city () {
 	}
 }
 
-function check_state_zip () {
-	var state = document.getElementsByName("state")[0];
-	var zip = document.getElementsByName("zip_code")[0];
-	var error = document.getElementById("state_zip_error");	
+function check_plan() {
+	var plan = document.getElementsByName("plan_type")[0];
+	var error = document.getElementById("plan_error");	
+	var p_val = plan.value;
 
-	var s_val = state.value.trim();
-	var z_val = zip.value.trim();
-
-	if (s_val == "" || z_val == "") {
-		error.innerHTML = "please enter state/zip code";
-		if (s_val == "")
-			state.style.borderLeft = RED_BORDER;
-		if (z_val == "")
-			zip.style.borderLeft = RED_BORDER;
+	if (p_val == "") {
+		error.innerHTML = "please select plan";
+		plan.style.borderLeft = RED_BORDER;
 		return false;
 	} else {
-		var s_re = /[A-Z]{2}/;
-		var s_check = s_re.test(s_val);
+		error.innerHTML = "";
+		plan.style.borderLeft = GREEN_BORDER;
+		return true;
+	}
+}
 
-		if (!s_check) {
-			error.innerHTML = "invalid state";
-			state.style.borderLeft = RED_BORDER;
-			return false;
-		} else {
+function check_state_zip () {
+	var zip = document.getElementsByName("zip_code")[0];
+	var state = document.getElementsByName("state")[0];
+	var error = document.getElementById("state_zip_error");	
+
+	var z_val = zip.value.trim();
+	var s_val = state.value;
+
+	if (z_val == "" || s_val == "") {
+		error.innerHTML = "please enter state/zip code";
+		if (z_val == "")
+			zip.style.borderLeft = RED_BORDER;
+		else
 			zip.style.borderLeft = GREEN_BORDER;
-		}
+		if (s_val == "")
+			state.style.borderLeft = RED_BORDER;
+		else
+			state.style.borderLeft = GREEN_BORDER;
+		return false;
+	} else {
+
+		state.style.borderLeft = GREEN_BORDER;
 
 		var z_re = /[0-9]{5,10}/;
 		var z_check = z_re.test(z_val);	
@@ -156,8 +217,9 @@ function check_state_zip () {
 			zip.style.borderLeft = RED_BORDER;
 			return false;
 		} else {
-			state.style.borderLeft = GREEN_BORDER;
+			zip.style.borderLeft = GREEN_BORDER;
 		}
+
 
 		error.innerHTML = "";
 		return true;
@@ -194,6 +256,9 @@ function check_validate_submit() {
 	if (!check_state_zip())
 		success = false;
 
+	if (!check_plan())
+		success = false;
+
 	return success;
 
 }
@@ -214,8 +279,9 @@ function submit_form() {
 	// password and password check must be the same, so only send one
 	post_data.address = $("input[name=address]").val();
 	post_data.city = $("input[name=city]").val();
-	post_data.state = $("input[name=state]").val();
+	post_data.state = $("select[name=state]").val();
 	post_data.zip_code = $("input[name=zip_code]").val();
+	post_data.plan_type = $("select[name=plan_type]").val();
 
 	$.post("script_sign_up.php", post_data, function(data) {
 		console.log(data);
@@ -224,7 +290,6 @@ function submit_form() {
 			window.location = 'sign_up_confirm.php';
 
 		} else if (data.status === "error") {
-			alert(data.message);
 			$("#email_error").text(data.message);
 		}
 

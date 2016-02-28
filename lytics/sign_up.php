@@ -26,12 +26,20 @@
 			<form method="POST" onsubmit="return submit_form();" id="sign_up_form">
 				<table>
 					<tr>
+						<td class="section-title">Name</td>
+					</tr>
+
+					<tr>
 						<td><input type="text" class="label" name="first_name"  placeholder="first name"></td>
 						<td><input type="text" class="label" name="last_name" placeholder="last name"></td>
 						<td><div id="name_error" class="error"></div></td>
 					</tr>
 
 					<tr></tr>
+
+					<tr>
+						<td class="section-title">Account Info</td>
+					</tr>
 
 					<tr>
 						<td colspan="2"><input type="text" class="label_2" name="email" placeholder="email@email.com"></td>
@@ -41,7 +49,6 @@
 					<tr>
 						<td colspan="2"><input type="password" class="label_2" name="password" placeholder="password" onblur="clear_pcheck()"></td>
 					</tr>	
-
 					<tr>
 						<td colspan="2"><input type="password" class="label_2" name="password_check" placeholder="retype password"></td>
 						<td><div id="pwd_error" class="error"></div></td>
@@ -50,15 +57,36 @@
 					<tr></tr>
 
 					<tr>
+						<td class="section-title">Address</td>
+					</tr>
+
+					<tr>
 						<td><input type="text" class="label" name="address" placeholder="address"></td>
 						<td><input type="text" class="label" name="city" placeholder="city"></td>
 						<td><div id="adr_city_error" class="error"></div></td>
 					</tr>
-
 					<tr>
-						<td><input type="text" class="label" name="state" placeholder="state"></td>
+						<td>
+							<select class="label select" name="state">
+								<option value="" disabled select>Select State</option>
+							</select>
+						</td>
 						<td><input type="text" class="label" name="zip_code" placeholder="zip code"></td>
 						<td><div id="state_zip_error" class="error"></div></td>
+					</tr>
+
+					<tr></tr>
+
+					<tr>
+						<td class="section-title">Billing</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<select class="label select" name="plan_type">
+								<option value="" disabled select>Select Plan Type</option>
+							</select>
+						</td>
+						<td><div id="plan_error" class="error"></div></td>
 					</tr>
 
 					<tr></tr>
