@@ -91,23 +91,31 @@ function check_names() {
 	var f_val = f_name.value.trim();
 	var l_val = l_name.value.trim();
 
-	if (f_val == "" || l_val == "") {
-		error.innerHTML = "please enter name";
-		if (f_val == "")
-			f_name.style.borderLeft = RED_BORDER;
-		else
-			f_name.style.borderLeft = GREEN_BORDER;
+	var name_re = /^[a-zA-z\- ]+$/;
+	var f_check = name_re.test(f_val);
+	var l_check = name_re.test(l_val);
 
-		if (l_val == "")
-			l_name.style.borderLeft = RED_BORDER;
-		else
-			l_name.style.borderLeft = GREEN_BORDER;
-		return false
+	// Check first name
+	if (f_val == "") {
+		f_name.style.borderLeft = RED_BORDER;
+		error.innerHTML = "please enter first name</br>";
+	} else if (!f_check) {
+		f_name.style.borderLeft = RED_BORDER;
+		error.innerHTML = "names must only contain letters and '-'</br>";
 	} else {
-		error.innerHTML = "";
 		f_name.style.borderLeft = GREEN_BORDER;
+		error.innerHTML = "";
+	}
+
+	// Check last name
+	if (l_val == "") {
+		l_name.style.borderLeft = RED_BORDER;
+		error.innerHTML += "please enter last name";
+	} else if (!l_check) {
+		l_name.style.borderLeft = RED_BORDER;
+		error.innerHTML += "names must only contain letters and '-'";
+	} else {
 		l_name.style.borderLeft = GREEN_BORDER;
-		return true;
 	}
 }
 
@@ -291,6 +299,7 @@ function submit_form() {
 
 		} else if (data.status === "error") {
 			$("#email_error").text(data.message);
+			document.getElementsByName("email")[0].style.borderLeft = RED_BORDER;
 		}
 
 	});

@@ -42,4 +42,5 @@
 		or die("Failed to insert into User_Details " . $db->error);
 
 	echo "All done</br>";
+	echo "<a href=\"index.php\">Home</a></br>";
 ?>
