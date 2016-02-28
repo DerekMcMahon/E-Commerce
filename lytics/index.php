@@ -59,8 +59,14 @@
 			<img src="img/tesla-heatmap.png" alt="" title="">
 			<section class="cta_desc">
 				<h3>We make good websites great.</h3>
+				<p style = "font-size: 20px">
+					Unlike other analytics platforms, Lytics consolidates all your data in a single, easy to understand dashboard. Our system lets you track
+					and store all your data using one service with the lowest monthly fee of any analytics system, <b>saving you money while increase your website revenue by an average of 20%</b>.
+				</p>
+				<!--
 				<p style = "font-size: 25px">After 3 months of using our product, our clients averaged a 20% increase in website revenue. Don't leave money on the table.</p>
-				<a href="sign_up.php" class="cta_btn">Sign Up Today!</a>
+				-->
+				<a href="sign_up.php" class="cta_btn">Sign Up Today</a>
 			</section>
 		</div>
 	</section><!-- call_to_action End -->
