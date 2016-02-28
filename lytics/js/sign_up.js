@@ -150,7 +150,6 @@ function check_state_zip () {
 
 		var z_re = /[0-9]{5,10}/;
 		var z_check = z_re.test(z_val);	
-		console.log(z_val);
 
 		if (!z_check) {
 			error.innerHTML = "invalid zip code";
@@ -219,6 +218,7 @@ function submit_form() {
 	post_data.zip_code = $("input[name=zip_code]").val();
 
 	$.post("script_sign_up.php", post_data, function(data) {
+		console.log(data);
 		var data = JSON.parse(data);
 		if (data.status === "success") {
 			window.location = 'sign_up_confirm.php';

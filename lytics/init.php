@@ -1,6 +1,6 @@
 <?php
 	# Assumes database created with name 'ecommerce-project'
-	$db = new mysqli('localhost', 'root', '', 'lytics');
+	$db = new mysqli('localhost', 'root', '', 'ecommerce-project');
 	if ($db->connect_error) {
 		die ("Could not connect to database");
 	}
