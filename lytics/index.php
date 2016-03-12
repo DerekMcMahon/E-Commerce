@@ -18,18 +18,8 @@
 <body>
 
 	<section class="billboard">
-		<header>
-			<div class="wrapper">
-				<a href=""><img src="img/lytics-logo-white.png" class="h_logo" alt="" title=""></a>
-				<nav>
-					<ul class="main_nav">
-						<li class="current"><a href="">Home</a></li>
-						<li><a href="about_us.html">About Us</a></li>
-						<li><a href="#">Sign Up</a></li>
-					</ul>
-				</nav>
-			</div>
-		</header>
+
+		<?php include("header.html") ?>
 
 		<section class="caption">
 			<p class="cap_title">Analytics for All</p>
@@ -70,8 +60,14 @@
 			<img src="img/tesla-heatmap.png" alt="" title="">
 			<section class="cta_desc">
 				<h3>We make good websites great.</h3>
+				<p style = "font-size: 20px">
+					Unlike other analytics platforms, Lytics consolidates all your data in a single, easy to understand dashboard. Our system lets you track
+					and store all your data using one service with the lowest monthly fee of any analytics system, <b>saving you money while increase your website revenue by an average of 20%</b>.
+				</p>
+				<!--
 				<p style = "font-size: 25px">After 3 months of using our product, our clients averaged a 20% increase in website revenue. Don't leave money on the table.</p>
-				<a href="#" class="cta_btn">Sign Up Today!</a>
+				-->
+				<a href="sign_up.php" class="cta_btn">Sign Up Today</a>
 			</section>
 		</div>
 	</section><!-- call_to_action End -->
@@ -125,7 +121,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href=#>Select</a>
+						<a class="cd-select" href="sign_up.php?plan=basic">Select</a>
 					</footer> <!-- .cd-pricing-footer -->
 				</li>
 				<li class="cd-popular">
@@ -150,7 +146,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href=#>Select</a>
+						<a class="cd-select" href="sign_up.php?plan=popular">Select</a>
 					</footer> <!-- .cd-pricing-footer -->
 				</li>
 				<li>
@@ -175,7 +171,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href=#>Select</a>
+						<a class="cd-select" href="sign_up.php?plan=premium">Select</a>
 					</footer>  <!-- .cd-pricing-footer -->
 				</li>
 			</ul> <!-- .cd-pricing-list -->
@@ -193,5 +189,4 @@
 		<hr class="footer_sp"/>
 		<p class="rights">© 2016 Lytics - All Rights Reserved </p>
 	</footer><!-- footer End -->
-
 </body>

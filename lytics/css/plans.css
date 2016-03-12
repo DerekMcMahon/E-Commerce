@@ -247,7 +247,7 @@ Main Components
     background-color: transparent;
   }
   .cd-popular .cd-pricing-header {
-    color: #e97d68;
+    color: #66b2ff;
     background-color: transparent;
   }
   .cd-secondary-theme .cd-pricing-header {
@@ -288,7 +288,7 @@ Main Components
     color: rgba(23, 61, 80, 0.4);
   }
   .cd-popular .cd-currency, .cd-popular .cd-duration {
-    color: #e97d68;
+    color: #66b2ff;
   }
   .cd-secondary-theme .cd-currency, .cd-secondary-theme .cd-duration {
     color: #2e80a7;
@@ -444,13 +444,13 @@ Main Components
     background-color: #112e3c;
   }
   .cd-popular .cd-select {
-    background-color: #e97d68;
+    background-color: #66b2ff;
   }
   .no-touch .cd-popular .cd-select:hover {
-    background-color: #ec907e;
+    background-color: #3399ff;
   }
   .cd-secondary-theme .cd-popular .cd-select {
-    background-color: #0c1f28;
+    background-color: #3399ff;
   }
   .no-touch .cd-secondary-theme .cd-popular .cd-select:hover {
     background-color: #112e3c;
