@@ -178,15 +178,6 @@
 		</div> <!-- end pricing plans -->
 	</section>
 
-	<footer>
-		<nav>
-			<ul>
-				<li><a href="">Home</a></li>
-				<li><a href="about_us.html">About Us</a></li>
-				<li><a href="#">Sign Up</a></li>
-			</ul>
-		</nav>
-		<hr class="footer_sp"/>
-		<p class="rights">© 2016 Lytics - All Rights Reserved </p>
-	</footer><!-- footer End -->
+	<?php include("footer.html") ?>
+    
 </body>

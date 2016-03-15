@@ -75,12 +75,11 @@
 						<td><div id="state_zip_error" class="error"></div></td>
 					</tr>
 
-					<tr></tr>
-
-					<tr>
-						<td class="section-title">Billing</td>
+                    <tr>
+						<td class="section-title">Payment Information</td>
 					</tr>
-					<tr>
+                    
+                    <tr>
 						<td colspan="2">
 							<select class="label select" name="plan_type">
 								<option value="" disabled select>Select Plan Type</option>
@@ -88,13 +87,43 @@
 						</td>
 						<td><div id="plan_error" class="error"></div></td>
 					</tr>
-
+                    
+                    <tr>
+						<td colspan = "2"><input type="text" class="label_2" name="credit_card_number" placeholder="credit card number"></td>
+						<td><div id="credit_card_number_error" class="error"></div></td>
+					</tr>
+  
+                    <tr>
+						<td colspan = "1"><input type="text" class="label" name="cvv"  placeholder="cvv number"></td>
+                        <td colspan = "1">
+                            <table name = "card_expiration">
+                                <tr>
+                                    <td>
+                                        <span class = "exp">Expires:</span>
+                                    </td>
+                                    <td>
+                                        <select class="label select" name="card_expiration_month">
+                                            <option value="" disabled select>mo</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="label select" name="card_expiration_year">
+                                            <option value="" disabled select>yr</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+						<td colspan="1"><div id="exp_cvv_error" class="error"></div></td>
+					</tr>
+                    
 					<tr></tr>
 
 					<tr>
 						<td colspan="2"><button class="submit">Create account</button></td>
 					</tr>
 					
+                    
 				</table>
 			</form>
 
