@@ -1,4 +1,7 @@
 <?php
+	// Include the code to send an email to the user
+	include("sendmail_helper.php");
+
 	# Connect to database
 	$db = new mysqli('localhost', 'root', '', 'ecommerce-project');
 	if ($db->connect_error) {
@@ -63,8 +66,14 @@
 	$_SESSION["first_name"] = ucwords($firstName, " ");
 	$_SESSION["last_name"] = ucwords($lastName, " ");
 	$_SESSION["email"] = $email;
-
-	// 
+ 
 	$response["status"] = "success";
 	echo json_encode($response);
+
+	// Send a success email
+	// TODO Add this AFTER successful registration with Stripe
+	$subject = "Lytics Registration";
+	$message = "Thank <b>you</b> for signing up for Lytics.";
+	// $message .= "<img src='cid:lytics_logo' alt='lytics logo' />";
+	sendEmail($email, $subject, $message);
 ?>
