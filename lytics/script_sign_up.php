@@ -73,7 +73,13 @@
 	// Send a success email
 	// TODO Add this AFTER successful registration with Stripe
 	$subject = "Lytics Registration";
-	$message = "Thank <b>you</b> for signing up for Lytics.";
-	// $message .= "<img src='cid:lytics_logo' alt='lytics logo' />";
+	$message = "<p style='font-size:16px; color:#222222'>";
+	$message .= ucwords($firstName) . ",<br><br>";
+	$message .= "Thank you for signing up for the " .ucwords($planType) . " Lytics plan. Your payment has been successfully processed.<br><br>";
+	$message .= "If you have any questions, contact us at lyticscompany@gmail.com.<br><br>";
+	$message .= "We look forward to doing business with you!<br>";
+	$message .= "The Lytics Team";
+	$message .= "</p>";
+	$message .= "<img src='cid:lytics_logo' alt='lytics logo' width='172px' height='40px'/>";
 	sendEmail($email, $subject, $message);
 ?>
