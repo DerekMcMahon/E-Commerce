@@ -1,6 +1,5 @@
 <?php
 	# Connect to database
-    include 'C:\xampp\stripe-php-3.10.0\lib\*.php';
 	$db = new mysqli('localhost', 'root', '', 'ecommerce-project');
 	if ($db->connect_error) {
 		die ("Could not connect to database");
