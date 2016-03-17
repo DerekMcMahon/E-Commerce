@@ -12,6 +12,40 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="js/sign_up.js"></script>
+    
+    <script type = "text/javascript"   src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+        Stripe.setPublishableKey('pk_test_beuU6yPV0bCPJyeGzgKLiJfl');
+        
+        var stripeResponseHandler = function(status, response) {
+              var $form = $('#sign_up_form');
+
+              if (response.error) {
+                // Show the errors on the form
+                $form.find('button').prop('disabled', false);
+              } else {
+                // token contains id, last4, and card type
+                var token = response.id;
+                // Insert the token into the form so it gets submitted to the server
+                $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+                // and re-submit
+                $form.get(0).submit();
+              }
+        };
+        
+        jQuery(function($){
+            $('#sign_up_form').submit(function(event){
+                var $form = $(this);
+
+                $form.find('button').prop('disabled', true);
+
+                Stripe.card.createToken($form, stripeResponseHandler);
+    
+                return false;
+            });
+        });
+    </script>
+
 </head>
 
 
@@ -81,7 +115,7 @@
                     
                     <tr>
 						<td colspan="2">
-							<select class="label select" name="plan_type">
+							<select class="label" name="plan_type">
 								<option value="" disabled select>Select Plan Type</option>
 							</select>
 						</td>
@@ -89,27 +123,23 @@
 					</tr>
                     
                     <tr>
-						<td colspan = "2"><input type="text" class="label_2" name="credit_card_number" placeholder="credit card number"></td>
+						<td colspan = "2"><input id = "credit_card_number" type="text" class="label_2" placeholder="credit card number" data-stripe = "number"></td>
 						<td><div id="credit_card_number_error" class="error"></div></td>
 					</tr>
   
                     <tr>
-						<td colspan = "1"><input type="text" class="label" name="cvv"  placeholder="cvv number"></td>
+						<td colspan = "1"><input id="cvv_number" type="text" class="label" placeholder="cvv number" data-stripe = "cvc"></td>
                         <td colspan = "1">
-                            <table name = "card_expiration">
+                            <table>
                                 <tr>
                                     <td>
                                         <span class = "exp">Expires:</span>
                                     </td>
                                     <td>
-                                        <select class="label select" name="card_expiration_month">
-                                            <option value="" disabled select>mo</option>
-                                        </select>
+                                        <input id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM"/>
                                     </td>
                                     <td>
-                                        <select class="label select" name="card_expiration_year">
-                                            <option value="" disabled select>yr</option>
-                                        </select>
+                                        <input id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY"/>
                                     </td>
                                 </tr>
                             </table>

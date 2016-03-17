@@ -25,12 +25,46 @@
 	$state = strtoupper($_POST["state"]);
 	$zipCode = strtolower($_POST["zip_code"]);
 	$planType = "";
+
 	if (isset($_POST["plan_type"])) {
 		$planType = strtolower($_POST["plan_type"]);
 	} else {
 		$planType = "basic"; 
 	}
 	$userId = -1;
+
+    //Charge the card
+    $token = $_POST["token"]; \Stripe\Stripe::setApiKey("sk_test_ifv9e7JnvNy8uwxGAia8cOos");
+    data-bitcoin = "false";
+    try{
+        if($planType == "Basic"){
+            $charge = \Stripe\Charge::create(array(
+                "amount" => 3000,
+                "currency" => "usd",
+                "source" => $token,
+                "description" => "Example charge"
+            ));
+        }
+        else if($planType == "Popular"){
+            $charge = \Stripe\Charge::create(array(
+                "amount" => 6000,
+                "currency" => "usd",
+                "source" => $token,
+                "description" => "Example charge"
+            ));
+        }
+        else{
+            $charge = \Stripe\Charge::create(array(
+                "amount" => 9000,
+                "currency" => "usd",
+                "source" => $token,
+                "description" => "Example charge"
+            ));
+        }
+    }
+    catch(\Stripe\Error\Card $e){
+        echo 'Didnt go through!: ', $e->getMessage(), "\n";
+    }
 
 	// Prepares statements
 	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)

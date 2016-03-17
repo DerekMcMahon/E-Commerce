@@ -57,6 +57,7 @@ $(document).ready(function() {
 		planSelect.append($("<option>", {value: val.toLowerCase(), html: val}));
 	});
     
+    /*
     //Set credit card expiration month dropdown
     var months = ["12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01"];
     var monthSelect = $("select[name=card_expiration_month]");
@@ -70,6 +71,7 @@ $(document).ready(function() {
     $(years).each(function(index, val){
       yearSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
     });
+    */
 
 	// Set plan type from get param if present
 	var urlPlanParam = get_url_plan();
@@ -251,88 +253,108 @@ function check_state_zip () {
 
 function check_payment_info () {
     var error = false;
-
-    var number = document.getElementsByName("credit_card_number")[0];
+    
+    var number = document.getElementById("credit_card_number");
+    var cvv = document.getElementById("cvv_number");
+    var month = document.getElementById("expiration_month");
+    var year = document.getElementById("expiration_year");
+    
     var number_error = document.getElementById("credit_card_number_error");
+    var exp_cvv_error = document.getElementById("exp_cvv_error");
     
-    var cvv = document.getElementsByName("cvv")[0];
-    var month = document.getElementsByName("card_expiration_month")[0];
-    var year = document.getElementsByName("card_expiration_year")[0];
-    var e_v_error = document.getElementById("exp_cvv_error");
-    
-    //verify valid credit card number
-    var num = number.value.trim();
-    
-    var validNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    
-    number_error.innerHTML = "";
+    //Verify the credit card number for length and only digits
     number.style.borderLeft = GREEN_BORDER;
+    number_error.innerHTML = "";
+    var num = number.value.trim();
+    var valid_Numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",];
     if(num.length != 16){
-        number_error.innerHTML = "please enter 16 digits for the credit card number";
+        error = true;
+        number_error.innerHTML = "Please enter 16 digits";
         number.style.borderLeft = RED_BORDER;
-        error = true;
     }
-    
     for(var i = 0; i < num.length; i++){
-        var isValid  = false;
-        for(var j = 0; j < validNumbers.length; j++){
-            if(validNumbers[j] == num.charAt(i)){
+        var isValid = false;
+        for(var j = 0; j < valid_Numbers.length; j++){
+            if(num.charAt(i) == valid_Numbers[j]){
                 isValid = true;
             }
         }
         if(!isValid){
-            number_error.innerHTML = "please only enter numbers for the credit card number";
+            error = true;
+            number_error.innerHTML = "Please only enter digits";
             number.style.borderLeft = RED_BORDER;
-            error = true;
         }
     }
     
-    //Verify cvv and expiration date
-    var cvv_num = cvv.value.trim();
-    var mo = month.value;
-    var yr = year.value; 
-    
-    e_v_error.innerHTML = "";
+    //Verify the cvv number and card expiration date
     cvv.style.borderLeft = GREEN_BORDER;
+    month.style.borderLeft = GREEN_BORDER;
+    year.style.borderLeft = GREEN_BORDER;
+    exp_cvv_error.innerHTML = "";
+    var cvv_num = cvv.value.trim();
+    var mm = month.value.trim();
+    var yyyy = year.value.trim();
     if(cvv_num.length != 3 && cvv_num.length != 4){
-        e_v_error.innerHTML = "please enter a 3-4 digit card verification";
-        cvv.style.borderLeft = RED_BORDER;
         error = true;
+        exp_cvv_error.innerHTML = "Please enter a 3-4 digit cvv";
+        cvv.style.borderLeft = RED_BORDER;
     }
-    
     for(var i = 0; i < cvv_num.length; i++){
-        var isValid  = false;
-        for(var j = 0; j < validNumbers.length; j++){
-            if(validNumbers[j] == cvv_num.charAt(i)){
+        var isValid = false;
+        for(var j = 0; j < valid_Numbers.length; j++){
+            if(cvv_num.charAt(i) == valid_Numbers[j]){
                 isValid = true;
             }
         }
         if(!isValid){
-            e_v_error.innerHTML = "please only enter numbers for the credit verification";
-            cvv.style.borderLeft = RED_BORDER;
             error = true;
+            exp_cvv_error.innerHTML = "Please only enter digits";
+            cvv.style.borderLeft = RED_BORDER;
         }
     }
-    
-	if (mo == "" || yr == "") {
-		e_v_error.innerHTML = "please select a month and date";
-		month.style.borderLeft = RED_BORDER;
-        year.style.borderLeft = RED_BORDER;
+    if(mm.length == 2){
+        for(var i = 0; i < mm.length; i++){
+            var isValid = false;
+            for(var j = 0; j < valid_Numbers.length; j++){
+                if(mm.charAt(i) == valid_Numbers[j]){
+                    isValid = true;
+                }
+            }
+            if(!isValid){
+                error = true;
+                exp_cvv_error.innerHTML = "Please only enter digits";
+                month.style.borderLeft = RED_BORDER;
+            }
+        }
+    }
+    else{
         error = true;
-	} else {
-		month.style.borderLeft = GREEN_BORDER;
-        year.style.borderLeft = GREEN_BORDER;
-	}
+        month.style.borderLeft = RED_BORDER;
+        exp_cvv_error.innerHTML = "Please enter a 2 digit month";
+    }
+    
+    if(yyyy.length == 4){
+        for(var i = 0; i < yyyy.length; i++){
+            var isValid = false;
+            for(var j = 0; j < valid_Numbers.length; j++){
+                if(yyyy.charAt(i) == valid_Numbers[j]){
+                    isValid = true;
+                }
+            }
+            if(!isValid){
+                error = true;
+                exp_cvv_error.innerHTML = "Please only enter digits";
+                year.style.borderLeft = RED_BORDER;
+            }
+        }
+    }
+    else{
+        error = true;
+        year.style.borderLeft = RED_BORDER;
+        exp_cvv_error.innerHTML = "Please enter a 4 digit year";
+    }
     
     return !error;
-}
-
-function clear_pcheck() {
-	var password_check = document.getElementsByName("password_check")[0];
-	var error = document.getElementById("pwd_error");
-	password_check.style.borderLeft = "";
-	password_check.value = "";
-	error.innerHTML = ""
 }
 
 
@@ -385,6 +407,7 @@ function submit_form() {
 	post_data.state = $("select[name=state]").val();
 	post_data.zip_code = $("input[name=zip_code]").val();
 	post_data.plan_type = $("select[name=plan_type]").val();
+    post_data.token = $("input[name=stripeToken]").val();
 
 	$.post("script_sign_up.php", post_data, function(data) {
 		console.log(data);
