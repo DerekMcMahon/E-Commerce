@@ -57,7 +57,7 @@
 		<div class="wrapper">
 
 			<h2>Signup</h2>
-			<form method="POST" onsubmit="return submit_form();" id="sign_up_form">
+			<form action = "" method="POST" onsubmit="return submit_form();" id="sign_up_form">
 				<table>
 					<tr>
 						<td class="section-title">Name</td>
@@ -136,10 +136,10 @@
                                         <span class = "exp">Expires:</span>
                                     </td>
                                     <td>
-                                        <input id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM"/>
+                                        <select id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM"/>
                                     </td>
                                     <td>
-                                        <input id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY"/>
+                                        <select id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY"/>
                                     </td>
                                 </tr>
                             </table>

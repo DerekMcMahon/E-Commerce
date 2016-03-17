@@ -57,21 +57,19 @@ $(document).ready(function() {
 		planSelect.append($("<option>", {value: val.toLowerCase(), html: val}));
 	});
     
-    /*
     //Set credit card expiration month dropdown
     var months = ["12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01"];
-    var monthSelect = $("select[name=card_expiration_month]");
+    var monthSelect = $("select[id=expiration_month]");
     $(months).each(function(index, val){
       monthSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
     });
     
     //Set credit card expiration year dropdown
     var years = ["24", "23", "22", "21", "20", "19", "18", "17", "16"];
-    var yearSelect = $("select[name=card_expiration_year]");
+    var yearSelect = $("select[id=expiration_year]");
     $(years).each(function(index, val){
       yearSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
     });
-    */
 
 	// Set plan type from get param if present
 	var urlPlanParam = get_url_plan();
@@ -312,6 +310,7 @@ function check_payment_info () {
             cvv.style.borderLeft = RED_BORDER;
         }
     }
+    /*
     if(mm.length == 2){
         for(var i = 0; i < mm.length; i++){
             var isValid = false;
@@ -353,6 +352,7 @@ function check_payment_info () {
         year.style.borderLeft = RED_BORDER;
         exp_cvv_error.innerHTML = "Please enter a 4 digit year";
     }
+    */
     
     return !error;
 }

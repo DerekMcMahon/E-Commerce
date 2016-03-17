@@ -1,5 +1,6 @@
 <?php
 	# Connect to database
+    include 'C:\xampp\stripe-php-3.10.0\lib\*.php';
 	$db = new mysqli('localhost', 'root', '', 'ecommerce-project');
 	if ($db->connect_error) {
 		die ("Could not connect to database");
@@ -34,8 +35,8 @@
 	$userId = -1;
 
     //Charge the card
-    $token = $_POST["token"]; \Stripe\Stripe::setApiKey("sk_test_ifv9e7JnvNy8uwxGAia8cOos");
-    data-bitcoin = "false";
+    \Stripe\Stripe::setApiKey("sk_test_ifv9e7JnvNy8uwxGAia8cOos");
+    $token = $_POST["token"];
     try{
         if($planType == "Basic"){
             $charge = \Stripe\Charge::create(array(
