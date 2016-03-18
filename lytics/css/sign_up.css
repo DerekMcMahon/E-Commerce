@@ -112,6 +112,8 @@ span.term a:hover{
 	border-radius: 0px;
 	-webkit-appearance: none;
 	cursor: pointer;
+	width: 100%;
+	min-width: 100%;
 }
 
 .section-title {

@@ -35,6 +35,28 @@
 	}
 	$userId = -1;
 
+	// Prepares statements
+	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)
+		VALUES (?, ?, ?)");
+	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code, stripe_cust_id)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+	// Bind parameters
+	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
+	$userDetailInsertStmt->bind_param("isssssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode, $customer->id);
+
+	// Execute the statements
+	$userInsertStmt->execute();
+	if ($db->errno == 1062) {	// 1062 = error for duplicate user
+		$response["status"] = "error";
+		$response["error_type"] = "email";
+		$response["message"] = "'$email' is already registered";
+		echo json_encode($response);
+		exit(0);
+	}
+	$userInsertStmt->close();
+
+	// Do this step AFTER trying to insert the user so that duplicate user emails are not charged
     // Charge the card for a subscription
     \Stripe\Stripe::setApiKey("sk_test_ifv9e7JnvNy8uwxGAia8cOos");
     
@@ -50,40 +72,21 @@
 		$body = $e->getJsonBody();
 		$err  = $body['error'];
 
-		print('Status is:' . $e->getHttpStatus() . "\n");
-		print('Type is:' . $err['type'] . "\n");
-		print('Code is:' . $err['code'] . "\n");
-		// param is '' in this case
-		print('Param is:' . $err['param'] . "\n");
-		print('Message is:' . $err['message'] . "\n");
+		$response["status"] = "error";
+		$response["error_type"] = "stripe";
+		$response["message"] = $err['message'];
+
+		echo json_encode($response);
 
 		// Exit early after returning json response
-		exit();
-	}
-
-	// Prepares statements
-	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)
-		VALUES (?, ?, ?)");
-	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code, stripe_cust_id)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
-	// Bind parameters
-	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
-	$userDetailInsertStmt->bind_param("isssssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode, $customer->id);
-
-	// Execute the statements
-	$userInsertStmt->execute();
-	if ($db->errno == 1062) {	// 1062 = error for duplicate user
-		$response["status"] = "error";
-		$response["message"] = "'$email' is already registered";
-		echo json_encode($response);
 		exit(0);
 	}
+
+	// Insert the user details in the database
 	$userId = $db->insert_id;
 	$userDetailInsertStmt->execute();
 
 	// Close the statements
-	$userInsertStmt->close();
 	$userDetailInsertStmt->close();
 
 	// Start a session

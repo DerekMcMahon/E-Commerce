@@ -67,7 +67,7 @@ $(document).ready(function() {
     });
     
     //Set credit card expiration year dropdown
-    var years = ["24", "23", "22", "21", "20", "19", "18", "17", "16"];
+    var years = ["16", "17", "18", "19", "20", "21", "22", "23", "24"];
     var yearSelect = $("select[id=expiration_year]");
     $(years).each(function(index, val){
       yearSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
@@ -375,25 +375,18 @@ function check_validate_submit() {
     if(!check_payment_info())
         success = false;
 
-    if (!success) {
-    	//var wrapper = document.getElementById("form_wrapper");
-    	//wrapper.style.marginLeft = 150px;
-    } else {
-    	wrapper.style.marginLeft = auto;
-    }
+    // if (!success) {
+    // 	//var wrapper = document.getElementById("form_wrapper");
+    // 	//wrapper.style.marginLeft = 150px;
+    // } else {
+    // 	// wrapper.style.marginLeft = auto;
+    // }
 
 	return success;
 
 }
 
 function submit_form(stripe_token) {
-	var is_valid = check_validate_submit();
-
-	// If not valid, return false before creating POST
-	if (!is_valid) {
-		return false;
-	}
-
 	var post_data = {}
 	post_data.first_name = $("input[name=first_name]").val();
 	post_data.last_name = $("input[name=last_name]").val();
@@ -414,8 +407,16 @@ function submit_form(stripe_token) {
 			window.location = 'sign_up_confirm.php';
 
 		} else if (data.status === "error") {
-			$("#email_error").text(data.message);
-			document.getElementsByName("email")[0].style.borderLeft = RED_BORDER;
+			if (data.error_type === "stripe") {
+				$("#credit_card_number_error").text(data.message);
+				$("#credit_card_number").css("border-left", RED_BORDER);
+			} else if (data.error_type === "email") {
+				$("#email_error").text(data.message);
+				document.getElementsByName("email")[0].style.borderLeft = RED_BORDER;
+			}
+
+			// Re-enable submit button
+			$('#sign_up_form').find('button').prop('disabled', false);
 		}
 
 	});
