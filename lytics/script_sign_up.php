@@ -31,7 +31,7 @@
 	if (isset($_POST["plan_type"])) {
 		$planType = strtolower($_POST["plan_type"]);
 	} else {
-		$planType = "plan_basic"; 
+		$planType = "plan_basic";
 	}
 	$userId = -1;
 

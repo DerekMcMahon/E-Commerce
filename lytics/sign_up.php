@@ -140,10 +140,10 @@
                                         <span class = "exp">Expires:</span>
                                     </td>
                                     <td>
-                                        <input id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM"/>
+                                        <select id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM"/>
                                     </td>
                                     <td>
-                                        <input id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY"/>
+                                        <select id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY"/>
                                     </td>
                                 </tr>
                             </table>
