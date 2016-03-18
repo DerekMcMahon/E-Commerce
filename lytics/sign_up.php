@@ -18,26 +18,33 @@
         Stripe.setPublishableKey('pk_test_beuU6yPV0bCPJyeGzgKLiJfl');
         
         var stripeResponseHandler = function(status, response) {
-              var $form = $('#sign_up_form');
+			var $form = $('#sign_up_form');
 
-              if (response.error) {
-                // Show the errors on the form
-                $form.find('button').prop('disabled', false);
-              } else {
-                // token contains id, last4, and card type
-                var token = response.id;
-                // Insert the token into the form so it gets submitted to the server
-                // $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-                // and re-submit
-                // $form.get(0).submit();
+			if (response.error) {
+				// Show the errors on the form
+				$form.find('button').prop('disabled', false);
+			} else {
+				// token contains id, last4, and card type
+				var token = response.id;
+				// Insert the token into the form so it gets submitted to the server
+				// $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+				// and re-submit
+				// $form.get(0).submit();
 
-                // Call the submit form function with the new Stripe token
-                submit_form(token);
-              }
+				// Call the submit form function with the new Stripe token
+				submit_form(token);
+			}
         };
         
         jQuery(function($){
             $('#sign_up_form').submit(function(event){
+				var is_valid = check_validate_submit();
+
+				// If not valid, return false before creating POST or Stripe token
+				if (!is_valid) {
+					return false;
+				}
+
                 var $form = $(this);
 
                 $form.find('button').prop('disabled', true);
@@ -96,15 +103,15 @@
 
 					<tr>
 						<td colspan="4">
-							<input type="password" class="label_2" name="password" placeholder="password" onblur="clear_pcheck()">
+							<input type="password" class="label_2" name="password" placeholder="password">
+						</td>
+						<td>
+							<div id="pwd_error" class="error"></div>
 						</td>
 					</tr>	
 					<tr>
 						<td colspan="4">
 							<input type="password" class="label_2" name="password_check" placeholder="retype password">
-						</td>
-						<td>
-							<div id="pwd_error" class="error"></div>
 						</td>
 					</tr>
 
@@ -158,7 +165,7 @@
                     
                     <tr>
 						<td colspan="4">
-							<input ="credit_card_number" type="text" class="label_2" placeholder="credit card number" data-stripe="number" maxlength="16">
+							<input id="credit_card_number" type="text" class="label_2" placeholder="credit card number" data-stripe="number" maxlength="16">
 						</td>
 						<td>
 							<div id="credit_card_number_error" class="error"></div>
