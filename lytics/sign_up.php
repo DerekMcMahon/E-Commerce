@@ -27,9 +27,12 @@
                 // token contains id, last4, and card type
                 var token = response.id;
                 // Insert the token into the form so it gets submitted to the server
-                $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+                // $form.append($('<input type="hidden" name="stripeToken" />').val(token));
                 // and re-submit
-                $form.get(0).submit();
+                // $form.get(0).submit();
+
+                // Call the submit form function with the new Stripe token
+                submit_form(token);
               }
         };
         
@@ -57,7 +60,8 @@
 		<div class="wrapper">
 
 			<h2>Signup</h2>
-			<form method="POST" onsubmit="return submit_form();" id="sign_up_form">
+			<form method="POST" id="sign_up_form">
+			<!--<form method="POST" action="stripe_test.php" id="sign_up_form">-->
 				<table>
 					<tr>
 						<td class="section-title">Name</td>

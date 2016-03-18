@@ -1,8 +1,9 @@
-
 var RED_BORDER = "6px solid red";
 var GREEN_BORDER = "6px solid #40A46F";
 
 //var fields = {"first_name", "last_name", }
+
+
 
 function check_email() {
 	var email = document.getElementsByName("email")[0];
@@ -54,7 +55,8 @@ $(document).ready(function() {
 	var planTypes = ["Basic", "Popular", "Premium"];
 	var planSelect = $("select[name=plan_type]");
 	$(planTypes).each(function(index, val) {
-		planSelect.append($("<option>", {value: val.toLowerCase(), html: val}));
+		var plan_val = "plan_" + val.toLowerCase();
+		planSelect.append($("<option>", {value: plan_val, html: val}));
 	});
     
     /*
@@ -388,7 +390,7 @@ function check_validate_submit() {
 
 }
 
-function submit_form() {
+function submit_form(stripe_token) {
 	var is_valid = check_validate_submit();
 
 	// If not valid, return false before creating POST
@@ -407,7 +409,7 @@ function submit_form() {
 	post_data.state = $("select[name=state]").val();
 	post_data.zip_code = $("input[name=zip_code]").val();
 	post_data.plan_type = $("select[name=plan_type]").val();
-    post_data.token = $("input[name=stripeToken]").val();
+    post_data.stripeToken = stripe_token;
 
 	$.post("script_sign_up.php", post_data, function(data) {
 		console.log(data);
