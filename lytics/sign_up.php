@@ -42,7 +42,7 @@
 
                 $form.find('button').prop('disabled', true);
 
-                Stripe.card.createToken($form, stripeResponseHandler);
+                //Stripe.card.createToken($form, stripeResponseHandler);
     
                 return false;
             });
@@ -60,8 +60,8 @@
 		<div class="wrapper" id="form_wrapper">
 
 			<h2>Signup</h2>
-			<form method="POST" id="sign_up_form">
-			<!--<form method="POST" action="stripe_test.php" id="sign_up_form">-->
+			<form method="POST" id="sign_up_form" onsubmit="return submit_form('asdasd')">
+			<!-- <form method="POST" action="stripe_test.php" id="sign_up_form"> -->
 				<table>
 					<tr>
 						<td class="section-title">Name</td>

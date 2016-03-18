@@ -141,6 +141,11 @@ function check_names() {
 	}
 }
 
+function clear_pcheck() {
+	var password_check = document.getElementsByName("password_check")[0];
+	password_check.value = "";
+}
+
 function check_password () {
 	var password = document.getElementsByName("password")[0];
 	var password_check = document.getElementsByName("password_check")[0];
