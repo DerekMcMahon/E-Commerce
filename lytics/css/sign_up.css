@@ -16,6 +16,14 @@ header {
 	padding-bottom: 40px;
 }
 
+.category {
+	width:100%;
+	background-color: #FFFFFF;
+	font-size: 18px;
+	padding-top: 145px;
+	padding-bottom: 40px;
+}
+
 table {
 	border-collapse: separate;
 	border-spacing: 10px;
@@ -27,6 +35,11 @@ td {
 
 /*** from original css ***/
 /* start editing from here */
+
+#expiration_year {
+	padding-left: 18px;
+	width: 65px;
+}
 
 /*** form wrapper ***/
 
@@ -65,7 +78,7 @@ span.term a:hover{
 	padding: 15px;
 	font-size: 1em;
 	color: #666666;
-	min-width: 87%;
+	min-width: 85.5%;
 	cursor: text;
 	font-family: 'Oxygen', sans-serif;
 	outline: none;
@@ -81,10 +94,26 @@ span.term a:hover{
 	border-top: none;
 }
 
+.exp{
+	font-size: 1em;
+	color: #666666;
+	min-width: 87%;
+	cursor: text;
+	font-family: 'Oxygen', sans-serif;
+	outline: none;
+	font-weight: 600;
+	border-left: 6px solid #fff;
+	border-bottom: none;
+	border-right: none;
+	border-top: none;
+}
+
 .select {
 	border-radius: 0px;
 	-webkit-appearance: none;
 	cursor: pointer;
+	width: 100%;
+	min-width: 100%;
 }
 
 .section-title {
@@ -101,7 +130,7 @@ select {
 
 .label_2 { 
 	padding: 14px;
-	min-width: 94%;
+	min-width: 93.5%;
 	font-size: 1em;
 	/*margin: 18px 0px;*/
 	border:none;

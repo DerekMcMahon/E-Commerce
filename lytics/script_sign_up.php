@@ -1,6 +1,5 @@
 <?php
-	// Include the code to send an email to the user
-	include("sendmail_helper.php");
+	require_once('stripe-php-3.10.0/init.php');
 
 	# Connect to database
 	$db = new mysqli('localhost', 'root', '', 'ecommerce-project');
@@ -11,7 +10,7 @@
 	if (!isset($_POST["first_name"]) ||	!isset($_POST["last_name"]) || !isset($_POST["email"]) ||
 		!isset($_POST["password"]) || !isset($_POST["address"]) || !isset($_POST["city"]) ||
 		!isset($_POST["state"]) || !isset($_POST["zip_code"])) {
-		// echo "Invalid POST data";
+		echo "Invalid POST data<br>";
 		print_r($_POST);
 		exit(1);
 	}
@@ -28,36 +27,72 @@
 	$state = strtoupper($_POST["state"]);
 	$zipCode = strtolower($_POST["zip_code"]);
 	$planType = "";
+
 	if (isset($_POST["plan_type"])) {
 		$planType = strtolower($_POST["plan_type"]);
 	} else {
-		$planType = "basic"; 
+		$planType = "plan_basic";
 	}
 	$userId = -1;
 
-	// Prepares statements
-	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)
-		VALUES (?, ?, ?)");
-	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code)
-		VALUES (?, ?, ?, ?, ?, ?, ?)");
-
-	// Bind parameters
-	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
-	$userDetailInsertStmt->bind_param("issssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode);
-
-	// Execute the statements
-	$userInsertStmt->execute();
-	if ($db->errno == 1062) {	// 1062 = error for duplicate user
+	// Check for duplicate emails
+	$emailQueryStmt = $db->prepare("SELECT * FROM Users WHERE email=?");
+	$emailQueryStmt->bind_param("s", $email);
+	$emailQueryStmt->execute();
+	$result = $emailQueryStmt->get_result();
+	if ($result->num_rows != 0) {
 		$response["status"] = "error";
+		$response["error_type"] = "email";
 		$response["message"] = "'$email' is already registered";
 		echo json_encode($response);
 		exit(0);
 	}
+
+	// Do this step AFTER checking for duplicate emails so that cards are not charged twice
+    // Charge the card for a subscription
+    \Stripe\Stripe::setApiKey("sk_test_ifv9e7JnvNy8uwxGAia8cOos");
+    
+    $token = $_POST['stripeToken'];
+
+    try {
+	    $customer = \Stripe\Customer::create(array(
+	    	"source" => $token,
+	    	"plan" => $planType,
+	    	"email" => $email
+	    	));
+	} catch (\Stripe\Error\Card $e) {
+		$body = $e->getJsonBody();
+		$err  = $body['error'];
+
+		$response["status"] = "error";
+		$response["error_type"] = "stripe";
+		$response["message"] = $err['message'];
+
+		echo json_encode($response);
+
+		// Exit early after returning json response
+		exit(0);
+	}
+
+	// Prepares statements
+	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)
+		VALUES (?, ?, ?)");
+	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code, stripe_cust_id)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+	// Bind parameters
+	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
+	$userDetailInsertStmt->bind_param("isssssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode, $customer->id);
+
+	// Execute the statements
+	$userInsertStmt->execute();
+	$userInsertStmt->close();
+
+	// Insert the user details in the database
 	$userId = $db->insert_id;
 	$userDetailInsertStmt->execute();
 
 	// Close the statements
-	$userInsertStmt->close();
 	$userDetailInsertStmt->close();
 
 	// Start a session
@@ -66,20 +101,9 @@
 	$_SESSION["first_name"] = ucwords($firstName, " ");
 	$_SESSION["last_name"] = ucwords($lastName, " ");
 	$_SESSION["email"] = $email;
- 
+	$_SESSION["plan_type"] = $planType;
+
+	// echo json response
 	$response["status"] = "success";
 	echo json_encode($response);
-
-	// Send a success email
-	// TODO Add this AFTER successful registration with Stripe
-	$subject = "Lytics Registration";
-	$message = "<p style='font-size:16px; color:#222222'>";
-	$message .= ucwords($firstName) . ",<br><br>";
-	$message .= "Thank you for signing up for the " .ucwords($planType) . " Lytics plan. Your payment has been successfully processed.<br><br>";
-	$message .= "If you have any questions, contact us at lyticscompany@gmail.com.<br><br>";
-	$message .= "We look forward to doing business with you!<br>";
-	$message .= "The Lytics Team";
-	$message .= "</p>";
-	$message .= "<img src='cid:lytics_logo' alt='lytics logo' width='172px' height='40px'/>";
-	sendEmail($email, $subject, $message);
 ?>

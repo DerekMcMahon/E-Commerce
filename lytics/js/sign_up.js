@@ -1,8 +1,9 @@
-
 var RED_BORDER = "6px solid red";
 var GREEN_BORDER = "6px solid #40A46F";
 
 //var fields = {"first_name", "last_name", }
+
+
 
 function check_email() {
 	var email = document.getElementsByName("email")[0];
@@ -54,8 +55,23 @@ $(document).ready(function() {
 	var planTypes = ["Basic", "Popular", "Premium"];
 	var planSelect = $("select[name=plan_type]");
 	$(planTypes).each(function(index, val) {
-		planSelect.append($("<option>", {value: val.toLowerCase(), html: val}));
+		var plan_val = "plan_" + val.toLowerCase();
+		planSelect.append($("<option>", {value: plan_val, html: val}));
 	});
+    
+    //Set credit card expiration month dropdown
+    var months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+    var monthSelect = $("select[id=expiration_month]");
+    $(months).each(function(index, val){
+      monthSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
+    });
+    
+    //Set credit card expiration year dropdown
+    var years = ["16", "17", "18", "19", "20", "21", "22", "23", "24"];
+    var yearSelect = $("select[id=expiration_year]");
+    $(years).each(function(index, val){
+      yearSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
+    });
 
 	// Set plan type from get param if present
 	var urlPlanParam = get_url_plan();
@@ -101,7 +117,7 @@ function check_names() {
 		error.innerHTML = "please enter first name</br>";
 	} else if (!f_check) {
 		f_name.style.borderLeft = RED_BORDER;
-		error.innerHTML = "names must only contain letters and '-'</br>";
+		error.innerHTML = "only letters and '-'</br>";
 	} else {
 		f_name.style.borderLeft = GREEN_BORDER;
 		error.innerHTML = "";
@@ -116,6 +132,12 @@ function check_names() {
 		error.innerHTML += "names must only contain letters and '-'";
 	} else {
 		l_name.style.borderLeft = GREEN_BORDER;
+	}
+
+	if (f_check && l_check) {
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -159,23 +181,40 @@ function check_address_city () {
 	var a_val = address.value.trim();
 	var c_val = city.value.trim();
 
-	if (a_val == "" || c_val == ""){
-		error.innerHTML = "please enter address/city";
-		if (a_val == "")
-			address.style.borderLeft = RED_BORDER;
-		else
-			address.style.borderLeft = GREEN_BORDER;
-		if (c_val == "")
-			city.style.borderLeft = RED_BORDER;
-		else
-			city.style.borderLeft = GREEN_BORDER;
-		return false;
+	var a_re = /^[a-zA-z\d\.\s\-]+$/;
+	var c_re = /^[a-zA-z\-\s]+$/;
+
+	var a_check = a_re.test(a_val);
+	var c_check = c_re.test(c_val);
+
+	if (a_val == "") {
+		error.innerHTML = "please enter an address <br/>";
+		address.style.borderLeft = RED_BORDER;
+	} else if (!a_check) {
+		error.innerHTML = "invalid address <br/>";
+		address.style.borderLeft = RED_BORDER;
 	} else {
 		error.innerHTML = "";
 		address.style.borderLeft = GREEN_BORDER;
-		city.style.borderLeft = GREEN_BORDER;
-		return true;
 	}
+
+	if (c_val == "") {
+		error.innerHTML += "please enter a city";
+		city.style.borderLeft = RED_BORDER;
+	} else if (!c_check) {
+		error.innerHTML += "invalid city";
+		city.style.borderLeft = RED_BORDER;
+	} else {
+		error.innerHTML += "";
+		city.style.borderLeft = GREEN_BORDER;
+	}	
+
+	if (a_check && c_check) {
+		return true;
+	} else {
+		return false;
+	}
+
 }
 
 function check_plan() {
@@ -217,7 +256,7 @@ function check_state_zip () {
 
 		state.style.borderLeft = GREEN_BORDER;
 
-		var z_re = /[0-9]{5,10}/;
+		var z_re = /^[0-9]{5}$/;
 		var z_check = z_re.test(z_val);	
 
 		if (!z_check) {
@@ -235,12 +274,73 @@ function check_state_zip () {
 	}
 }
 
-function clear_pcheck() {
-	var password_check = document.getElementsByName("password_check")[0];
-	var error = document.getElementById("pwd_error");
-	password_check.style.borderLeft = "";
-	password_check.value = "";
-	error.innerHTML = ""
+function check_payment_info () {
+    var error = false;
+    
+    var number = document.getElementById("credit_card_number");
+    var cvv = document.getElementById("cvv_number");
+    var month = document.getElementById("expiration_month");
+    var year = document.getElementById("expiration_year");
+    
+    var number_error = document.getElementById("credit_card_number_error");
+    var exp_cvv_error = document.getElementById("exp_cvv_error");
+
+    var n_re = /^[0-9]{16}$/;
+    var num = number.value.trim();
+    var n_check = n_re.test(num)
+
+    if (num == "") {
+    	number.style.borderLeft = RED_BORDER;
+    	number_error.innerHTML = "Please enter credit card number";
+    } else if (!n_check) {
+    	number.style.borderLeft = RED_BORDER;
+    	number_error.innerHTML = "Invalid credit card";
+    } else {
+    	number.style.borderLeft = GREEN_BORDER;
+    	number_error.innerHTML = "";
+    }
+
+    var cvv_re = /^[0-9]{3}$/;
+    var cvv_num = cvv.value.trim();
+    var cvv_check = cvv_re.test(cvv_num);
+
+    if (cvv_num == "") {
+    	cvv.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML = "Please enter cvv number <br/>";
+    } else if (!cvv_check) {
+    	cvv.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML = "Invalid cvv <br/>";
+    } else {
+    	cvv.style.borderLeft = GREEN_BORDER;
+    	exp_cvv_error.innerHTML = "";
+    }
+
+    var m_test = false;
+    if (month.value != "") {
+    	m_test = true;
+    	month.style.borderLeft = GREEN_BORDER;
+    	exp_cvv_error.innerHTML += "";
+    } else {
+    	month.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML += "Please select month <br/>";
+    }
+    
+    var y_test = false;
+    if (year.value != "") {
+    	y_test = true;
+    	year.style.borderLeft = GREEN_BORDER;
+    	exp_cvv_error.innerHTML += "";
+    } else {
+    	year.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML += "Please select year";
+    }
+
+    if (n_check && cvv_check && m_test && y_test) {
+    	return true;
+    } else {
+    	return false;
+    }
+    
 }
 
 
@@ -266,19 +366,22 @@ function check_validate_submit() {
 
 	if (!check_plan())
 		success = false;
+    
+    if(!check_payment_info())
+        success = false;
+
+    // if (!success) {
+    // 	//var wrapper = document.getElementById("form_wrapper");
+    // 	//wrapper.style.marginLeft = 150px;
+    // } else {
+    // 	// wrapper.style.marginLeft = auto;
+    // }
 
 	return success;
 
 }
 
-function submit_form() {
-	var is_valid = check_validate_submit();
-
-	// If not valid, return false before creating POST
-	if (!is_valid) {
-		return false;
-	}
-
+function submit_form(stripe_token) {
 	var post_data = {}
 	post_data.first_name = $("input[name=first_name]").val();
 	post_data.last_name = $("input[name=last_name]").val();
@@ -290,16 +393,24 @@ function submit_form() {
 	post_data.state = $("select[name=state]").val();
 	post_data.zip_code = $("input[name=zip_code]").val();
 	post_data.plan_type = $("select[name=plan_type]").val();
+    post_data.stripeToken = stripe_token;
 
 	$.post("script_sign_up.php", post_data, function(data) {
 		console.log(data);
 		var data = JSON.parse(data);
 		if (data.status === "success") {
 			window.location = 'sign_up_confirm.php';
-
 		} else if (data.status === "error") {
-			$("#email_error").text(data.message);
-			document.getElementsByName("email")[0].style.borderLeft = RED_BORDER;
+			if (data.error_type === "stripe") {
+				$("#credit_card_number_error").text(data.message);
+				$("#credit_card_number").css("border-left", RED_BORDER);
+			} else if (data.error_type === "email") {
+				$("#email_error").text(data.message);
+				document.getElementsByName("email")[0].style.borderLeft = RED_BORDER;
+			}
+
+			// Re-enable submit button
+			$('#sign_up_form').find('button').prop('disabled', false);
 		}
 
 	});
