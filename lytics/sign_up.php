@@ -57,7 +57,7 @@
 	<?php include("header.html") ?>
 
 	<section class="sign_up">
-		<div class="wrapper">
+		<div class="wrapper" id="form_wrapper">
 
 			<h2>Signup</h2>
 			<form method="POST" id="sign_up_form">

@@ -36,6 +36,11 @@ td {
 /*** from original css ***/
 /* start editing from here */
 
+#expiration_year {
+	padding-left: 18px;
+	width: 65px;
+}
+
 /*** form wrapper ***/
 
 .sign_up .wrapper{
@@ -73,7 +78,7 @@ span.term a:hover{
 	padding: 15px;
 	font-size: 1em;
 	color: #666666;
-	min-width: 87%;
+	min-width: 85.5%;
 	cursor: text;
 	font-family: 'Oxygen', sans-serif;
 	outline: none;
@@ -123,7 +128,7 @@ select {
 
 .label_2 { 
 	padding: 14px;
-	min-width: 94%;
+	min-width: 93.5%;
 	font-size: 1em;
 	/*margin: 18px 0px;*/
 	border:none;

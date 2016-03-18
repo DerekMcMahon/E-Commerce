@@ -60,7 +60,7 @@ $(document).ready(function() {
 	});
     
     //Set credit card expiration month dropdown
-    var months = ["12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01"];
+    var months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
     var monthSelect = $("select[id=expiration_month]");
     $(months).each(function(index, val){
       monthSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
@@ -117,7 +117,7 @@ function check_names() {
 		error.innerHTML = "please enter first name</br>";
 	} else if (!f_check) {
 		f_name.style.borderLeft = RED_BORDER;
-		error.innerHTML = "names must only contain letters and '-'</br>";
+		error.innerHTML = "only letters and '-'</br>";
 	} else {
 		f_name.style.borderLeft = GREEN_BORDER;
 		error.innerHTML = "";
@@ -174,7 +174,6 @@ function check_password () {
 }
 
 function check_address_city () {
-	console.log("here");
 	var address = document.getElementsByName("address")[0];
 	var city = document.getElementsByName("city")[0];
 	var error = document.getElementById("adr_city_error");	
@@ -257,7 +256,7 @@ function check_state_zip () {
 
 		state.style.borderLeft = GREEN_BORDER;
 
-		var z_re = /[0-9]{5,10}/;
+		var z_re = /^[0-9]{5}$/;
 		var z_check = z_re.test(z_val);	
 
 		if (!z_check) {
@@ -286,22 +285,22 @@ function check_payment_info () {
     var number_error = document.getElementById("credit_card_number_error");
     var exp_cvv_error = document.getElementById("exp_cvv_error");
 
-    var n_re = /[0-9]{16}/;
+    var n_re = /^[0-9]{16}$/;
     var num = number.value.trim();
     var n_check = n_re.test(num)
 
     if (num == "") {
     	number.style.borderLeft = RED_BORDER;
-    	number_error.innerHTML = "Please enter your credit card number";
+    	number_error.innerHTML = "Please enter credit card number";
     } else if (!n_check) {
     	number.style.borderLeft = RED_BORDER;
     	number_error.innerHTML = "Invalid credit card";
     } else {
     	number.style.borderLeft = GREEN_BORDER;
-    	number.error.innerHTML = "";
+    	number_error.innerHTML = "";
     }
 
-    var cvv_re = /[0-9]{3}/;
+    var cvv_re = /^[0-9]{3}$/;
     var cvv_num = cvv.value.trim();
     var cvv_check = cvv_re.test(cvv_num);
 
@@ -310,10 +309,10 @@ function check_payment_info () {
     	exp_cvv_error.innerHTML = "Please enter cvv number <br/>";
     } else if (!cvv_check) {
     	cvv.style.borderLeft = RED_BORDER;
-    	exp_cvv_error.innerHTML = "Invalid cvv";
+    	exp_cvv_error.innerHTML = "Invalid cvv <br/>";
     } else {
     	cvv.style.borderLeft = GREEN_BORDER;
-    	exp_cvv_error.error.innerHTML = "";
+    	exp_cvv_error.innerHTML = "";
     }
 
     var m_test = false;
@@ -370,6 +369,13 @@ function check_validate_submit() {
     
     if(!check_payment_info())
         success = false;
+
+    if (!success) {
+    	//var wrapper = document.getElementById("form_wrapper");
+    	//wrapper.style.marginLeft = 150px;
+    } else {
+    	wrapper.style.marginLeft = auto;
+    }
 
 	return success;
 
