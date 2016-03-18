@@ -1,4 +1,6 @@
 <?php
+	require_once('stripe-php-3.10.0/init.php');
+
 	# Connect to database
 	$db = new mysqli('localhost', 'root', '', 'ecommerce-project');
 	if ($db->connect_error) {
@@ -8,7 +10,7 @@
 	if (!isset($_POST["first_name"]) ||	!isset($_POST["last_name"]) || !isset($_POST["email"]) ||
 		!isset($_POST["password"]) || !isset($_POST["address"]) || !isset($_POST["city"]) ||
 		!isset($_POST["state"]) || !isset($_POST["zip_code"])) {
-		// echo "Invalid POST data";
+		echo "Invalid POST data<br>";
 		print_r($_POST);
 		exit(1);
 	}
@@ -29,52 +31,45 @@
 	if (isset($_POST["plan_type"])) {
 		$planType = strtolower($_POST["plan_type"]);
 	} else {
-		$planType = "basic"; 
+		$planType = "plan_basic";
 	}
 	$userId = -1;
 
-    //Charge the card
+    // Charge the card for a subscription
     \Stripe\Stripe::setApiKey("sk_test_ifv9e7JnvNy8uwxGAia8cOos");
-    $token = $_POST["token"];
-    try{
-        if($planType == "Basic"){
-            $charge = \Stripe\Charge::create(array(
-                "amount" => 3000,
-                "currency" => "usd",
-                "source" => $token,
-                "description" => "Example charge"
-            ));
-        }
-        else if($planType == "Popular"){
-            $charge = \Stripe\Charge::create(array(
-                "amount" => 6000,
-                "currency" => "usd",
-                "source" => $token,
-                "description" => "Example charge"
-            ));
-        }
-        else{
-            $charge = \Stripe\Charge::create(array(
-                "amount" => 9000,
-                "currency" => "usd",
-                "source" => $token,
-                "description" => "Example charge"
-            ));
-        }
-    }
-    catch(\Stripe\Error\Card $e){
-        echo 'Didnt go through!: ', $e->getMessage(), "\n";
-    }
+    
+    $token = $_POST['stripeToken'];
+
+    try {
+	    $customer = \Stripe\Customer::create(array(
+	    	"source" => $token,
+	    	"plan" => $planType,
+	    	"email" => $email
+	    	));
+	} catch (\Stripe\Error\Card $e) {
+		$body = $e->getJsonBody();
+		$err  = $body['error'];
+
+		print('Status is:' . $e->getHttpStatus() . "\n");
+		print('Type is:' . $err['type'] . "\n");
+		print('Code is:' . $err['code'] . "\n");
+		// param is '' in this case
+		print('Param is:' . $err['param'] . "\n");
+		print('Message is:' . $err['message'] . "\n");
+
+		// Exit early after returning json response
+		exit();
+	}
 
 	// Prepares statements
 	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)
 		VALUES (?, ?, ?)");
-	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code)
-		VALUES (?, ?, ?, ?, ?, ?, ?)");
+	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code, stripe_cust_id)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
 	// Bind parameters
 	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
-	$userDetailInsertStmt->bind_param("issssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode);
+	$userDetailInsertStmt->bind_param("isssssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode, $customer->id);
 
 	// Execute the statements
 	$userInsertStmt->execute();
@@ -98,7 +93,7 @@
 	$_SESSION["last_name"] = ucwords($lastName, " ");
 	$_SESSION["email"] = $email;
 
-	// 
+	// echo json response
 	$response["status"] = "success";
 	echo json_encode($response);
 ?>
