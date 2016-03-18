@@ -305,7 +305,7 @@ function check_payment_info () {
     	number_error.innerHTML = "";
     }
 
-    var cvv_re = /^[0-9]{3}$/;
+    var cvv_re = /^[0-9]{3,4}$/;
     var cvv_num = cvv.value.trim();
     var cvv_check = cvv_re.test(cvv_num);
 
