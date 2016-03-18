@@ -67,7 +67,7 @@ $(document).ready(function() {
     });
     
     //Set credit card expiration year dropdown
-    var years = ["24", "23", "22", "21", "20", "19", "18", "17", "16"];
+    var years = ["16", "17", "18", "19", "20", "21", "22", "23", "24"];
     var yearSelect = $("select[id=expiration_year]");
     $(years).each(function(index, val){
       yearSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
