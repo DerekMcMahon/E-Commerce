@@ -285,102 +285,63 @@ function check_payment_info () {
     
     var number_error = document.getElementById("credit_card_number_error");
     var exp_cvv_error = document.getElementById("exp_cvv_error");
-    
-    //Verify the credit card number for length and only digits
-    number.style.borderLeft = GREEN_BORDER;
-    number_error.innerHTML = "";
+
+    var n_re = /[0-9]{16}/;
     var num = number.value.trim();
-    var valid_Numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",];
-    if(num.length != 16){
-        error = true;
-        number_error.innerHTML = "Please enter 16 digits";
-        number.style.borderLeft = RED_BORDER;
+    var n_check = n_re.test(num)
+
+    if (num == "") {
+    	number.style.borderLeft = RED_BORDER;
+    	number_error.innerHTML = "Please enter your credit card number";
+    } else if (!n_check) {
+    	number.style.borderLeft = RED_BORDER;
+    	number_error.innerHTML = "Invalid credit card";
+    } else {
+    	number.style.borderLeft = GREEN_BORDER;
+    	number.error.innerHTML = "";
     }
-    for(var i = 0; i < num.length; i++){
-        var isValid = false;
-        for(var j = 0; j < valid_Numbers.length; j++){
-            if(num.charAt(i) == valid_Numbers[j]){
-                isValid = true;
-            }
-        }
-        if(!isValid){
-            error = true;
-            number_error.innerHTML = "Please only enter digits";
-            number.style.borderLeft = RED_BORDER;
-        }
-    }
-    
-    //Verify the cvv number and card expiration date
-    cvv.style.borderLeft = GREEN_BORDER;
-    month.style.borderLeft = GREEN_BORDER;
-    year.style.borderLeft = GREEN_BORDER;
-    exp_cvv_error.innerHTML = "";
+
+    var cvv_re = /[0-9]{3}/;
     var cvv_num = cvv.value.trim();
-    var mm = month.value.trim();
-    var yyyy = year.value.trim();
-    if(cvv_num.length != 3 && cvv_num.length != 4){
-        error = true;
-        exp_cvv_error.innerHTML = "Please enter a 3-4 digit cvv";
-        cvv.style.borderLeft = RED_BORDER;
+    var cvv_check = cvv_re.test(cvv_num);
+
+    if (cvv_num == "") {
+    	cvv.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML = "Please enter cvv number <br/>";
+    } else if (!cvv_check) {
+    	cvv.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML = "Invalid cvv";
+    } else {
+    	cvv.style.borderLeft = GREEN_BORDER;
+    	exp_cvv_error.error.innerHTML = "";
     }
-    for(var i = 0; i < cvv_num.length; i++){
-        var isValid = false;
-        for(var j = 0; j < valid_Numbers.length; j++){
-            if(cvv_num.charAt(i) == valid_Numbers[j]){
-                isValid = true;
-            }
-        }
-        if(!isValid){
-            error = true;
-            exp_cvv_error.innerHTML = "Please only enter digits";
-            cvv.style.borderLeft = RED_BORDER;
-        }
-    }
-    /*
-    if(mm.length == 2){
-        for(var i = 0; i < mm.length; i++){
-            var isValid = false;
-            for(var j = 0; j < valid_Numbers.length; j++){
-                if(mm.charAt(i) == valid_Numbers[j]){
-                    isValid = true;
-                }
-            }
-            if(!isValid){
-                error = true;
-                exp_cvv_error.innerHTML = "Please only enter digits";
-                month.style.borderLeft = RED_BORDER;
-            }
-        }
-    }
-    else{
-        error = true;
-        month.style.borderLeft = RED_BORDER;
-        exp_cvv_error.innerHTML = "Please enter a 2 digit month";
+
+    var m_test = false;
+    if (month.value != "") {
+    	m_test = true;
+    	month.style.borderLeft = GREEN_BORDER;
+    	exp_cvv_error.innerHTML += "";
+    } else {
+    	month.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML += "Please select month <br/>";
     }
     
-    if(yyyy.length == 4){
-        for(var i = 0; i < yyyy.length; i++){
-            var isValid = false;
-            for(var j = 0; j < valid_Numbers.length; j++){
-                if(yyyy.charAt(i) == valid_Numbers[j]){
-                    isValid = true;
-                }
-            }
-            if(!isValid){
-                error = true;
-                exp_cvv_error.innerHTML = "Please only enter digits";
-                year.style.borderLeft = RED_BORDER;
-            }
-        }
+    var y_test = false;
+    if (year.value != "") {
+    	y_test = true;
+    	year.style.borderLeft = GREEN_BORDER;
+    	exp_cvv_error.innerHTML += "";
+    } else {
+    	year.style.borderLeft = RED_BORDER;
+    	exp_cvv_error.innerHTML += "Please select year";
     }
-    else{
-        error = true;
-        year.style.borderLeft = RED_BORDER;
-        exp_cvv_error.innerHTML = "Please enter a 4 digit year";
+
+    if (n_check && cvv_check && m_test && y_test) {
+    	return true;
+    } else {
+    	return false;
     }
-    */
     
-    return !error;
 }
 
 

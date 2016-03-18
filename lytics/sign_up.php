@@ -143,10 +143,13 @@
                                     </td>
                                     <td>
                                         <select id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM">
+                                        	<option value="" disabled select>MM</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <select id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY"/>
+                                        <select id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY">
+                                        	<option value="" disabled select>YY</option>
+                                        </select>
                                     </td>
                                 </tr>
                             </table>
