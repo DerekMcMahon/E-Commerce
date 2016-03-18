@@ -131,6 +131,12 @@ function check_names() {
 	} else {
 		l_name.style.borderLeft = GREEN_BORDER;
 	}
+
+	if (f_check && l_check) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function check_password () {
@@ -166,6 +172,7 @@ function check_password () {
 }
 
 function check_address_city () {
+	console.log("here");
 	var address = document.getElementsByName("address")[0];
 	var city = document.getElementsByName("city")[0];
 	var error = document.getElementById("adr_city_error");	
@@ -173,23 +180,40 @@ function check_address_city () {
 	var a_val = address.value.trim();
 	var c_val = city.value.trim();
 
-	if (a_val == "" || c_val == ""){
-		error.innerHTML = "please enter address/city";
-		if (a_val == "")
-			address.style.borderLeft = RED_BORDER;
-		else
-			address.style.borderLeft = GREEN_BORDER;
-		if (c_val == "")
-			city.style.borderLeft = RED_BORDER;
-		else
-			city.style.borderLeft = GREEN_BORDER;
-		return false;
+	var a_re = /^[a-zA-z\d\.\s\-]+$/;
+	var c_re = /^[a-zA-z\-\s]+$/;
+
+	var a_check = a_re.test(a_val);
+	var c_check = c_re.test(c_val);
+
+	if (a_val == "") {
+		error.innerHTML = "please enter an address <br/>";
+		address.style.borderLeft = RED_BORDER;
+	} else if (!a_check) {
+		error.innerHTML = "invalid address <br/>";
+		address.style.borderLeft = RED_BORDER;
 	} else {
 		error.innerHTML = "";
 		address.style.borderLeft = GREEN_BORDER;
-		city.style.borderLeft = GREEN_BORDER;
-		return true;
 	}
+
+	if (c_val == "") {
+		error.innerHTML += "please enter a city";
+		city.style.borderLeft = RED_BORDER;
+	} else if (!c_check) {
+		error.innerHTML += "invalid city";
+		city.style.borderLeft = RED_BORDER;
+	} else {
+		error.innerHTML += "";
+		city.style.borderLeft = GREEN_BORDER;
+	}	
+
+	if (a_check && c_check) {
+		return true;
+	} else {
+		return false;
+	}
+
 }
 
 function check_plan() {

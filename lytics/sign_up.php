@@ -109,13 +109,15 @@
 						<td><div id="state_zip_error" class="error"></div></td>
 					</tr>
 
+					<tr></tr>
+
                     <tr>
 						<td class="section-title">Payment Information</td>
 					</tr>
                     
                     <tr>
 						<td colspan="2">
-							<select class="label" name="plan_type">
+							<select class="label select" name="plan_type">
 								<option value="" disabled select>Select Plan Type</option>
 							</select>
 						</td>
@@ -136,7 +138,8 @@
                                         <span class = "exp">Expires:</span>
                                     </td>
                                     <td>
-                                        <select id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM"/>
+                                        <select id = "expiration_month" type="text" class="label select" data-stripe="exp-month" placeholder="MM">
+                                        </select>
                                     </td>
                                     <td>
                                         <select id = "expiration_year" type="text" class="label select" data-stripe="exp-year" placeholder="YYYY"/>
