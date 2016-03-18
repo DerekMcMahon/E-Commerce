@@ -14,6 +14,15 @@
 	<link rel="stylesheet" type="text/css" href="css/sign_up_confirm.css">
 
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		// Send AJAX request to send registration email
+    		// Note: Do this here to reduce page load
+    		$.get("script_send_reg_email.php", function() {
+    			// Optionally update UI after sending email
+    		});
+    	});
+    </script>
 </head>
 
 <body>

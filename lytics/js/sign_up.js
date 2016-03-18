@@ -405,11 +405,13 @@ function submit_form(stripe_token) {
 		var data = JSON.parse(data);
 		if (data.status === "success") {
 			window.location = 'sign_up_confirm.php';
-
 		} else if (data.status === "error") {
 			if (data.error_type === "stripe") {
 				$("#credit_card_number_error").text(data.message);
 				$("#credit_card_number").css("border-left", RED_BORDER);
+				$("#cvv_number").css("border-left", RED_BORDER);
+				$("#expiration_month").css("border-left", RED_BORDER);
+				$("#expiration_year").css("border-left", RED_BORDER);
 			} else if (data.error_type === "email") {
 				$("#email_error").text(data.message);
 				document.getElementsByName("email")[0].style.borderLeft = RED_BORDER;

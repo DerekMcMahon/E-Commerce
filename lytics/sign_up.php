@@ -174,7 +174,7 @@
   
                     <tr>
 						<td colspan="2">
-							<input id="cvv_number" type="text" class="label" placeholder="cvv number" data-stripe="cvc" maxlength="3">
+							<input id="cvv_number" type="text" class="label" placeholder="cvv number" data-stripe="cvc" maxlength="4">
 						</td>
                         <td colspan="1">
                             <select id="expiration_month" class="label select" data-stripe="exp-month" placeholder="MM">

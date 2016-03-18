@@ -35,28 +35,20 @@
 	}
 	$userId = -1;
 
-	// Prepares statements
-	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)
-		VALUES (?, ?, ?)");
-	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code, stripe_cust_id)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
-	// Bind parameters
-	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
-	$userDetailInsertStmt->bind_param("isssssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode, $customer->id);
-
-	// Execute the statements
-	$userInsertStmt->execute();
-	if ($db->errno == 1062) {	// 1062 = error for duplicate user
+	// Check for duplicate emails
+	$emailQueryStmt = $db->prepare("SELECT * FROM Users WHERE email=?");
+	$emailQueryStmt->bind_param("s", $email);
+	$emailQueryStmt->execute();
+	$result = $emailQueryStmt->get_result();
+	if ($result->num_rows != 0) {
 		$response["status"] = "error";
 		$response["error_type"] = "email";
 		$response["message"] = "'$email' is already registered";
 		echo json_encode($response);
 		exit(0);
 	}
-	$userInsertStmt->close();
 
-	// Do this step AFTER trying to insert the user so that duplicate user emails are not charged
+	// Do this step AFTER checking for duplicate emails so that cards are not charged twice
     // Charge the card for a subscription
     \Stripe\Stripe::setApiKey("sk_test_ifv9e7JnvNy8uwxGAia8cOos");
     
@@ -82,6 +74,20 @@
 		exit(0);
 	}
 
+	// Prepares statements
+	$userInsertStmt = $db->prepare("INSERT INTO Users (email, password, plan_type)
+		VALUES (?, ?, ?)");
+	$userDetailInsertStmt = $db->prepare("INSERT INTO User_Details (user_id, first_name, last_name, address, city, state, zip_code, stripe_cust_id)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+	// Bind parameters
+	$userInsertStmt->bind_param("sss", $email, $hashedPassword, $planType);
+	$userDetailInsertStmt->bind_param("isssssss", $userId, $firstName, $lastName, $address, $city, $state, $zipCode, $customer->id);
+
+	// Execute the statements
+	$userInsertStmt->execute();
+	$userInsertStmt->close();
+
 	// Insert the user details in the database
 	$userId = $db->insert_id;
 	$userDetailInsertStmt->execute();
@@ -95,6 +101,7 @@
 	$_SESSION["first_name"] = ucwords($firstName, " ");
 	$_SESSION["last_name"] = ucwords($lastName, " ");
 	$_SESSION["email"] = $email;
+	$_SESSION["plan_type"] = $planType;
 
 	// echo json response
 	$response["status"] = "success";

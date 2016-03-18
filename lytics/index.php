@@ -121,7 +121,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href="sign_up.php?plan=basic">Select</a>
+						<a class="cd-select" href="sign_up.php?plan=plan_basic">Select</a>
 					</footer> <!-- .cd-pricing-footer -->
 				</li>
 				<li class="cd-popular">
@@ -146,7 +146,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href="sign_up.php?plan=popular">Select</a>
+						<a class="cd-select" href="sign_up.php?plan=plan_popular">Select</a>
 					</footer> <!-- .cd-pricing-footer -->
 				</li>
 				<li>
@@ -171,7 +171,7 @@
 					</div> <!-- .cd-pricing-body -->
 
 					<footer class="cd-pricing-footer">
-						<a class="cd-select" href="sign_up.php?plan=premium">Select</a>
+						<a class="cd-select" href="sign_up.php?plan=plan_premium">Select</a>
 					</footer>  <!-- .cd-pricing-footer -->
 				</li>
 			</ul> <!-- .cd-pricing-list -->
