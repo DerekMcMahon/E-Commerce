@@ -60,18 +60,18 @@ $(document).ready(function() {
 	});
     
     //Set credit card expiration month dropdown
-    var months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-    var monthSelect = $("select[id=expiration_month]");
-    $(months).each(function(index, val){
-      monthSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
-    });
+    // var months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+    // var monthSelect = $("select[id=expiration_month]");
+    // $(months).each(function(index, val){
+    //   monthSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
+    // });
     
     //Set credit card expiration year dropdown
-    var years = ["16", "17", "18", "19", "20", "21", "22", "23", "24"];
-    var yearSelect = $("select[id=expiration_year]");
-    $(years).each(function(index, val){
-      yearSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
-    });
+    // var years = ["16", "17", "18", "19", "20", "21", "22", "23", "24"];
+    // var yearSelect = $("select[id=expiration_year]");
+    // $(years).each(function(index, val){
+    //   yearSelect.append($("<option>", {value: val.toLowerCase(), html: val}));              
+    // });
 
 	// Set plan type from get param if present
 	var urlPlanParam = get_url_plan();
@@ -279,6 +279,8 @@ function check_state_zip () {
 	}
 }
 
+/*
+// NOTE: This has been replaced by the stripe jquery.payment.js library
 function check_payment_info () {
     var error = false;
     
@@ -347,6 +349,44 @@ function check_payment_info () {
     }
     
 }
+*/
+
+function check_payment_info() {
+	var success = true;
+	var cardType = $.payment.cardType($("#credit_card_number").val());
+	var error_message = ""
+
+	// Check credit card number
+	if ($.payment.validateCardNumber($("#credit_card_number").val())) {
+		$("#credit_card_number").css("border-left", GREEN_BORDER);
+	} else {
+		error_message += "invalid card number<br/>";
+		$("#credit_card_number").css("border-left", RED_BORDER);
+		success = false;
+	}
+
+	// Check exp date
+	if ($.payment.validateCardExpiry($("#exp_date").payment('cardExpiryVal'))) {
+		$("#exp_date").css("border-left", GREEN_BORDER);
+	} else {
+		error_message += "invalid exp date<br/>";
+		$("#exp_date").css("border-left", RED_BORDER);
+		success = false;
+	}
+
+	// Check CVC
+	if (cardType != null && $.payment.validateCardCVC($("#cvv_number").val(), cardType)) {
+		$("#cvv_number").css("border-left", GREEN_BORDER);
+	} else {
+		error_message += "invalid cvc<br/>";
+		$("#cvv_number").css("border-left", RED_BORDER);
+		success = false;
+	}
+
+	$("#credit_card_number_error").html(error_message);
+
+	return success;
+}
 
 
 
@@ -410,8 +450,10 @@ function submit_form(stripe_token) {
 				$("#credit_card_number_error").text(data.message);
 				$("#credit_card_number").css("border-left", RED_BORDER);
 				$("#cvv_number").css("border-left", RED_BORDER);
-				$("#expiration_month").css("border-left", RED_BORDER);
-				$("#expiration_year").css("border-left", RED_BORDER);
+				$("#exp_date").css("border-left", RED_BORDER);
+
+				// $("#expiration_month").css("border-left", RED_BORDER);
+				// $("#expiration_year").css("border-left", RED_BORDER);
 			} else if (data.error_type === "email") {
 				$("#email_error").text(data.message);
 				document.getElementsByName("email")[0].style.borderLeft = RED_BORDER;

@@ -1,0 +1,27 @@
+.split-content-cell {
+	width: 50%;
+	height: 10px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.split-content-row {
+	display: table-row;
+}
+
+.split-content-container {
+	width: 100%;
+	display: table;
+	margin-bottom: 20px;
+}
+
+#total-visitor-count {
+	font-size: 96px;
+	font-family: 'LatoBold', arial;
+}
+
+#new-visitor-count {
+	font-size: 96px;
+	font-family: 'LatoBold', arial;
+}

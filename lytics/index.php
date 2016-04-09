@@ -1,8 +1,5 @@
 <?php 
 	session_start();
-	if (isset($_SESSION['first_name'])) {
-		header("Location: heat_map.php");
-	}
 ?>
 
 <!DOCTYPE html>
