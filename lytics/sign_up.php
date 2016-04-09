@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="js/sign_up.js"></script>
     
     <script type = "text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript" src="js/jquery.payment.js"></script>
     <script type="text/javascript">
         Stripe.setPublishableKey('pk_test_beuU6yPV0bCPJyeGzgKLiJfl');
         
@@ -45,6 +46,8 @@
         
         jQuery(function($){
             $('#sign_up_form').submit(function(event){
+            	event.preventDefault();
+
 				var is_valid = check_validate_submit();
 
 				// If not valid, return false before creating POST or Stripe token
@@ -56,10 +59,23 @@
 
                 $form.find('button').prop('disabled', true);
 
-                Stripe.card.createToken($form, stripeResponseHandler);
+                // NOTE: Manually create a Stripe token here to support combined exp date field
+                // Stripe.card.createToken($form, stripeResponseHandler);
+                var expiration = $("#exp_date").payment('cardExpiryVal');
+                Stripe.card.createToken({
+                	number: $("#credit_card_number").val(),
+                	cvc: $("#cvv_number").val(),
+                	exp_month: (expiration.month || 0),
+                	exp_year: (expiration.year || 0)
+                }, stripeResponseHandler)
     
                 return false;
             });
+
+            // Bind credit card fields
+            $("#credit_card_number").payment('formatCardNumber');
+			$("#exp_date").payment('formatCardExpiry');
+            $("#cvv_number").payment('formatCardCVC');
         });
     </script>
 
@@ -172,7 +188,7 @@
                     
                     <tr>
 						<td colspan="4">
-							<input id="credit_card_number" type="text" class="label_2" placeholder="credit card number" data-stripe="number" maxlength="16">
+							<input id="credit_card_number" type="text" class="label_2" placeholder="credit card number">
 						</td>
 						<td>
 							<div id="credit_card_number_error" class="error"></div>
@@ -181,9 +197,12 @@
   
                     <tr>
 						<td colspan="2">
-							<input id="cvv_number" type="text" class="label" placeholder="cvv number" data-stripe="cvc" maxlength="4">
+							<input id="cvv_number" type="text" class="label" placeholder="cvv number">
 						</td>
-                        <td colspan="1">
+						<td colspan="2">
+							<input id="exp_date" type="text" class="label" placeholder="exp date (mm/yyyy)">
+						</td>
+                        <!-- <td colspan="1">
                             <select id="expiration_month" class="label select" data-stripe="exp-month" placeholder="MM">
                             	<option value="" disabled select>MM</option>
                             </select>
@@ -192,7 +211,7 @@
                             <select id="expiration_year" class="label select" data-stripe="exp-year" placeholder="YY">
                             	<option value="" disabled select>YY</option>
                             </select>
-                        </td>
+                        </td> -->
 						<td colspan="1"><div id="exp_cvv_error" class="error"></div></td>
 					</tr>
                     
