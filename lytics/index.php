@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	if (isset($_SESSION['first_name'])) {
-		header("Location: dashboard.php");
+		header("Location: heat_map.php");
 	}
 ?>
 

@@ -68,7 +68,7 @@ function login() {
 		console.log(data);
 		var data = JSON.parse(data);
 		if (data.status === "success") {
-			window.location = 'dashboard.php';
+			window.location = 'heat_map.php';
 		} else if (data.status === "error") {
 			if (data.error_type === "email") {
 				$("#email_error").text(data.message);
