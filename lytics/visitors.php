@@ -42,7 +42,7 @@
 						<ul id="links">
 							<a href="heat_map.php"><li>Heat Map</li></a>
 							<a href="conversion_rate.php"><li>Conversion Rate</li></a>
-							<a href="visitors.php"><li class="selected">Visitors</li></a>
+							<a href="visitors.php"><li class="selected">Metrics</li></a>
 						</ul>
 					</div>
 				</td>

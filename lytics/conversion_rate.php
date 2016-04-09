@@ -18,6 +18,8 @@
 	<link rel="stylesheet" type="text/css" href="css/conversion_rate.css">
 
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/progressbar.min.js"></script>
+    <script type="text/javascript" src="js/conversion_rate.js"></script>
 
 
 </head>
@@ -38,20 +40,39 @@
 			<tr>
 				<td id="services">
 					<h3 id="title">Services</h3>
-						<ul id="links">
-							<a href="heat_map.php"><li>Heat Map</li></a>
-							<a href="conversion_rate.php"><li class="selected">Conversion Rate</li></a>
-							<a href="visitors.php"><li>Visitors</li></a>
-						</ul>
-					</div>
+					<ul id="links">
+						<a href="heat_map.php"><li>Heat Map</li></a>
+						<a href="conversion_rate.php"><li class="selected">Metrics</li></a>
+						<a href="visitors.php"><li>Visitors</li></a>
+					</ul>
 				</td>
 				<td id="content">
 					<div id="container">
-					
-			            <div id="div1" class="radial_container"></div>
-			            <div id="div2" class="radial_container"></div>
-			            <div id="div3" class="radial_container"></div>
-
+						<table>
+							<tr>
+								<td>
+									<div class="radial_wrapper">
+										<span id="radial_1"></span>
+									<div>
+								</td>
+								<td>
+									<div class="radial_wrapper">
+										<span id="radial_2"></span>
+									<div>
+								</td>
+								<td>
+									<div class="radial_wrapper">
+										<span id="radial_3"></span>
+									<div>
+								</td>
+							</tr>
+							<tr>
+								<td class="radial_label">User Conversion Rate</td>
+								<td class="radial_label">Average Session</td>
+								<td class="radial_label">Click Through Rate</td>
+							</tr>
+						</table>
+						
 					</div>
 				</td>
 			</tr>
