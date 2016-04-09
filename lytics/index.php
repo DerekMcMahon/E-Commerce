@@ -71,7 +71,13 @@
 				<!--
 				<p style = "font-size: 25px">After 3 months of using our product, our clients averaged a 20% increase in website revenue. Don't leave money on the table.</p>
 				-->
-				<a href="sign_up.php" class="cta_btn">Sign Up Today</a>
+			<?php
+				if (!isset($_SESSION['first_name'])):
+			?>
+					<a href="sign_up.php" class="cta_btn">Sign Up Today</a>
+			<?php
+				endif;
+			?>
 			</section>
 		</div>
 	</section><!-- call_to_action End -->
@@ -97,90 +103,99 @@
 		</div>
 	</section><!-- testimonials End -->
 
-	<!-- begin pricing plans -->
-	<section id="pricing_plans">
-		<h2 id="pricing_plan_title">Our Pricing Plans</h2>
-		<div class="cd-pricing-container cd-has-margins">
 
-			<ul class="cd-pricing-list">
-				<li>
-					<span class="cd-pricing-header">
-						<h2>Basic</h2>
+<?php
+	
+	if (!isset($_SESSION['first_name'])):
+?>
+		<!-- begin pricing plans -->
+		<section id="pricing_plans">
+			<h2 id="pricing_plan_title">Our Pricing Plans</h2>
+			<div class="cd-pricing-container cd-has-margins">
 
-						<div class="cd-price">
-							<span class="cd-currency">$</span>
-							<span class="cd-value">30</span>
-							<span class="cd-duration">mo</span>
-						</div>
-					</span> <!-- .cd-pricing-header -->
+				<ul class="cd-pricing-list">
+					<li>
+						<span class="cd-pricing-header">
+							<h2>Basic</h2>
 
-					<div class="cd-pricing-body">
-						<ul class="cd-pricing-features">
-							<li><em>10,000 users</em> Data cap</li>
-							<li><em>3 months</em> Data storage lifetime</li>
-							<li><em>1</em> Heatmap</li>
-							<li><em>0</em> Funnel Chart</li>
-							<li><em>24/7</em> Support</li>
-						</ul>
-					</div> <!-- .cd-pricing-body -->
+							<div class="cd-price">
+								<span class="cd-currency">$</span>
+								<span class="cd-value">30</span>
+								<span class="cd-duration">mo</span>
+							</div>
+						</span> <!-- .cd-pricing-header -->
 
-					<footer class="cd-pricing-footer">
-						<a class="cd-select" href="sign_up.php?plan=plan_basic">Select</a>
-					</footer> <!-- .cd-pricing-footer -->
-				</li>
-				<li class="cd-popular">
-					<span class="cd-pricing-header">
-						<h2>Popular</h2>
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>10,000 users</em> Data cap</li>
+								<li><em>3 months</em> Data storage lifetime</li>
+								<li><em>1</em> Heatmap</li>
+								<li><em>0</em> Funnel Chart</li>
+								<li><em>24/7</em> Support</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
 
-						<div class="cd-price">
-							<span class="cd-currency">$</span>
-							<span class="cd-value">60</span>
-							<span class="cd-duration">mo</span>
-						</div>
-					</span> <!-- .cd-pricing-header -->
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="sign_up.php?plan=plan_basic">Select</a>
+						</footer> <!-- .cd-pricing-footer -->
+					</li>
+					<li class="cd-popular">
+						<span class="cd-pricing-header">
+							<h2>Popular</h2>
 
-					<div class="cd-pricing-body">
-						<ul class="cd-pricing-features">
-							<li><em>100,000 users</em> Data cap</li>
-							<li><em>6 months</em> Data storage lifetime</li>
-							<li><em>5</em> Heatmaps</li>
-							<li><em>3</em> Funnel Charts</li>
-							<li><em>24/7</em> Support</li>
-						</ul>
-					</div> <!-- .cd-pricing-body -->
+							<div class="cd-price">
+								<span class="cd-currency">$</span>
+								<span class="cd-value">60</span>
+								<span class="cd-duration">mo</span>
+							</div>
+						</span> <!-- .cd-pricing-header -->
 
-					<footer class="cd-pricing-footer">
-						<a class="cd-select" href="sign_up.php?plan=plan_popular">Select</a>
-					</footer> <!-- .cd-pricing-footer -->
-				</li>
-				<li>
-					<span class="cd-pricing-header">
-						<h2>Premier</h2>
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>100,000 users</em> Data cap</li>
+								<li><em>6 months</em> Data storage lifetime</li>
+								<li><em>5</em> Heatmaps</li>
+								<li><em>3</em> Funnel Charts</li>
+								<li><em>24/7</em> Support</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
 
-						<div class="cd-price">
-							<span class="cd-currency">$</span>
-							<span class="cd-value">90</span>
-							<span class="cd-duration">mo</span>
-						</div>
-					</span> <!-- .cd-pricing-header -->
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="sign_up.php?plan=plan_popular">Select</a>
+						</footer> <!-- .cd-pricing-footer -->
+					</li>
+					<li>
+						<span class="cd-pricing-header">
+							<h2>Premier</h2>
 
-					<div class="cd-pricing-body">
-						<ul class="cd-pricing-features">
-							<li><em>Unlimited</em> Data</li>
-							<li><em>Unlimited</em> Data storage lifetime</li>
-							<li><em>10</em> Heatmaps</li>
-							<li><em>10</em> Funnel Charts</li>
-							<li><em>24/7</em> Support</li>
-						</ul>
-					</div> <!-- .cd-pricing-body -->
+							<div class="cd-price">
+								<span class="cd-currency">$</span>
+								<span class="cd-value">90</span>
+								<span class="cd-duration">mo</span>
+							</div>
+						</span> <!-- .cd-pricing-header -->
 
-					<footer class="cd-pricing-footer">
-						<a class="cd-select" href="sign_up.php?plan=plan_premium">Select</a>
-					</footer>  <!-- .cd-pricing-footer -->
-				</li>
-			</ul> <!-- .cd-pricing-list -->
-		</div> <!-- end pricing plans -->
-	</section>
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>Unlimited</em> Data</li>
+								<li><em>Unlimited</em> Data storage lifetime</li>
+								<li><em>10</em> Heatmaps</li>
+								<li><em>10</em> Funnel Charts</li>
+								<li><em>24/7</em> Support</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
+
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="sign_up.php?plan=plan_premium">Select</a>
+						</footer>  <!-- .cd-pricing-footer -->
+					</li>
+				</ul> <!-- .cd-pricing-list -->
+			</div> <!-- end pricing plans -->
+		</section>
+
+<?php
+	endif;
+?>
 
 	<?php include("footer.html") ?>
     

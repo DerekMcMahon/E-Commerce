@@ -24,3 +24,19 @@ td span {
 .label {
 	font-size: 40px;
 }
+
+.bar {
+	transform: translateX(-60px);
+	padding-top: 45px;
+}
+
+.progress_wrapper {
+	padding-top: 50px;
+	width: 75%;
+	margin: 0 auto;
+}
+
+#progress {
+	display: inline;
+	width: 50%;
+}
