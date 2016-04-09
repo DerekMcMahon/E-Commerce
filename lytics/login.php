@@ -1,3 +1,10 @@
+<?php 
+	session_start();
+	if (isset($_SESSION['first_name'])) {
+		header("Location: dashboard.php");
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,25 +20,24 @@
 	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="js/login.js"></script>
     
-    <script type = "text/javascript"   src="https://js.stripe.com/v2/"></script>
+    <script type = "text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
         
         jQuery(function($){
             $('#login_form').submit(function(event){
-				var is_valid = login();
+				var is_valid = check_login();
 
-				// If not valid, return false before creating POST or Stripe token
+				// If not valid, return false before creating POST
 				if (!is_valid) {
 					return false;
 				}
 
-                var $form = $(this);
+				login();
 
-                $form.find('button').prop('disabled', true);
-    
-                return false;
+				return false; // to avoid refreshing
             });
         });
+
     </script>
 
 </head>
@@ -42,7 +48,7 @@
 	<?php include("header.html") ?>
 
 	<section class="sign_up">
-		<div class="wrapper" id="form_wrapper">
+		<div class="wrapper" id="login_wrapper">
 
 			<h2>Login</h2>
 			<form method="POST" id="login_form">

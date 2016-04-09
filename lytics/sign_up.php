@@ -1,3 +1,10 @@
+<?php 
+	session_start();
+	if (isset($_SESSION['first_name'])) {
+		header("Location: dashboard.php");
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +20,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="js/sign_up.js"></script>
     
-    <script type = "text/javascript"   src="https://js.stripe.com/v2/"></script>
+    <script type = "text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
         Stripe.setPublishableKey('pk_test_beuU6yPV0bCPJyeGzgKLiJfl');
         

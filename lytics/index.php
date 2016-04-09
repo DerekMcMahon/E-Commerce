@@ -1,3 +1,9 @@
+<?php 
+	session_start();
+	if (isset($_SESSION['first_name'])) {
+		header("Location: dashboard.php");
+	}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +30,7 @@
 		<section class="caption">
 			<p class="cap_title">Analytics for All</p>
 		</section>
+		
 	</section><!-- Billboard End -->
 
 	<section class="services">

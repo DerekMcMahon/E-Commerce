@@ -5,8 +5,18 @@
 			<ul class="main_nav">
 				<li class="current"><a href="index.php">Home</a></li>
 				<li class="current"><a href="about_us.php">About Us</a></li>
-				<li class="current"><a href="sign_up.php">Sign Up</a></li>
-				<li class="current"><a href="login.php">Login</a></li>
+				<?php 
+					if (!isset($_SESSION['first_name'])) {
+				?>
+						<li class="current"><a href="sign_up.php">Sign Up</a></li>
+						<li class="current"><a href="login.php">Login</a></li>
+				<?php
+					} else {
+				?>
+						<li class="current"><a href="logout.php">Logout</a></li>
+				<?php
+					}
+				?>
 			</ul>
 		</nav>
 	</div>

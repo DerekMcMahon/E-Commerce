@@ -12,7 +12,7 @@
 	$subject = "Lytics Registration";
 	$message = "<p style='font-size:16px; color:#222222'>";
 	$message .= ucwords($firstName) . ",<br><br>";
-	$message .= "Thank you for signing up for the " .ucwords(substr($planType, 5)) . " Lytics plan. Your payment has been successfully processed.<br><br>";
+	$message .= "Thank you for signing up for the " . ucwords(substr($planType, 5)) . " Lytics plan. Your payment has been successfully processed.<br><br>";
 	$message .= "If you have any questions, contact us at lyticscompany@gmail.com.<br><br>";
 	$message .= "We look forward to doing business with you!<br>";
 	$message .= "The Lytics Team";
