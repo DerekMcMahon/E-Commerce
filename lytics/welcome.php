@@ -20,7 +20,7 @@
     		// Note: Do this here to reduce page load
     		$.get("script_send_reg_email.php", function() {
     			// Optionally update UI after sending email
-            console.log("Succeeded!")
+            	console.log("Succeeded!");
     		});
     	});
     </script>
@@ -39,7 +39,7 @@
 				<br/>
 				<br/>
 				<!-- NOTE: For the time being, this link intentionally does nothing-->
-				<p>Head to the <a href="dashboard.php">dashboard</a> to start making your content amazing.</p>
+				<p>Head to the <a href="heat_map.php">dashboard</a> to start making your content amazing.</p>
 			</div>
 
 		</div>

@@ -20,7 +20,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="js/login.js"></script>
     
-    <script type = "text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
         
         jQuery(function($){

@@ -9,6 +9,7 @@
 	echo "Dropping tables...</br>";
 	$db->query("DROP TABLE Users");
 	$db->query("DROP TABLE User_Details");
+	$db->query("DROP TABLE Data");
 
 	# Create new tables
 	echo "Creating new tables...</br>";
@@ -32,7 +33,7 @@
 		)") or die("Failed to make 'user_details' table");
 
 	# data table 
-	$db->query("CREATE TABLE data (
+	$db->query("CREATE TABLE Data (
 		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 		x INT, 
 		y INT

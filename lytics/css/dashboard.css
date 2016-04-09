@@ -32,9 +32,10 @@ header {
 
 .dashboard {
 	width:100%;
+	min-height: 600px;
 	background-color: #FFFFFF;
 	font-size: 18px;
-	padding-top: 140px;
+	padding-top: 100px;
 	padding-bottom: 50px;
 	font-family: 'LatoRegular', arial;
 }
@@ -68,17 +69,27 @@ h2 {
 table {
 	width: 100%;
 	border-collapse: separate;
-	border-spacing: 10px 10px;
+	border-spacing: 0px 8px;
+}
+
+.dashboard-row {
+	vertical-align: top;
 }
 
 /** actual content **/
+
+.services-container {
+	width: inherit;
+	position: fixed;
+}
+
 #services {
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	width: 20%;
 }
 
 #content {
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	width: 80%;
 	padding: 0;
 	position: relative;
@@ -89,6 +100,7 @@ table {
 }
 
 #services li {
+	width: 100%;
 	padding: 10px 10px;
 	list-style: none;
 	cursor: pointer;

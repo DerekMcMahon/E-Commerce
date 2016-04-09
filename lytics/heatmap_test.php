@@ -55,12 +55,12 @@
   	<?php include("header.html") ?>
 
     <div id="heatmap-container-wrapper">
-		<div id="heatmap-container">
+  		<div id="heatmap-container">
 
-	  	<section class="main-content">
-	  	</section>
-	  	
-		</div>
+  	  	<section class="main-content">
+  	  	</section>
+  	  	
+  		</div>
     </div>
 
     <?php include("footer.html") ?>
