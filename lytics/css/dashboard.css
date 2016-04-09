@@ -43,13 +43,13 @@ header {
 h2 {
 	font-family: 'LatoBold', arial;
 	font-size: 36px;
-	/*text-align: center;*/
+	text-align: center;
 	/*background: #1abc9c;*/
-	width: 500px;
 }
 
 #service_type {
-	text-align: center;
+	text-align: left;
+	margin-left: 10px;
 	font-size: 24px;
 }
 
@@ -90,9 +90,9 @@ table {
 
 #content {
 	/*border: 1px solid black;*/
+	vertical-align: top;
 	width: 80%;
 	padding: 0;
-	position: relative;
 }
 
 #services ul {
@@ -100,7 +100,7 @@ table {
 }
 
 #services li {
-	width: 100%;
+	width: 180px;
 	padding: 10px 10px;
 	font-size: 16px;
 	list-style: none;

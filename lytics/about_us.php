@@ -27,7 +27,13 @@
 			</div>
 			<div class="split-right">
 				<img src="img/startup-photos.jpg" alt="" title="">
-				<a href="sign_up.php" class="cta_btn">Sign Up Now!</a>
+			<?php 
+				if (!isset($_SESSION['first_name'])):
+			?>
+					<a href="sign_up.php" class="cta_btn">Sign Up Now!</a>
+			<?php
+				endif;
+			?>
 			</div>	
 		</div>
 	</section><!-- about-us end -->

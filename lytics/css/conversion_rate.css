@@ -2,8 +2,25 @@
 #container {
 	height: 100%;
 	width: 100%;
-	display: inline-block;
-	background: #bdc3c7;
-	position:absolute;
 	top:0;
+}
+
+td span {
+	margin: 20px;
+	height: 200px;
+	width: 200px;
+	display: inline-block;
+}
+
+.radial_wrapper {
+	padding-left: 10px;
+}
+
+.radial_label {
+	text-align: center;
+}
+
+
+.label {
+	font-size: 40px;
 }

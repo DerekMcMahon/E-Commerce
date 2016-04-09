@@ -75,7 +75,7 @@
 						<h3 id="title">Services</h3>
 						<ul id="links">
 							<a href="heat_map.php"><li class="selected">Heat Map</li></a>
-							<a href="conversion_rate.php"><li>Conversion Rate</li></a>
+							<a href="conversion_rate.php"><li>Metrics</li></a>
 							<a href="visitors.php"><li>Visitors</li></a>
 						</ul>
 					</div>
