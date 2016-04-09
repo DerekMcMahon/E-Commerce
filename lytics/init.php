@@ -31,6 +31,13 @@
 		stripe_cust_id VARCHAR(50)
 		)") or die("Failed to make 'user_details' table");
 
+	# data table 
+	$db->query("CREATE TABLE data (
+		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+		x INT, 
+		y INT
+		)") or die ("Failed to make 'data' table");
+
 	# Insert sample account
 	$hashedPassword = hash("sha256", "password", false);
 	$db->query("INSERT INTO Users (email, password, plan_type)

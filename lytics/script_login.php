@@ -42,7 +42,14 @@
 		if ($row['password'] == $hashedPassword) {
 
 			$id = $row['id'];
-			$plan_type = $row['plan_type'];
+			$plan = $row['plan_type'];
+			if ($plan == 'plan_basic'):
+				$plan_type = 'Basic';
+			elseif ($plan == 'plan_popular'):
+				$plan_type = 'Popular';
+			elseif ($plan == 'plan_premium'):
+				$plan_type = 'Premium';
+			endif;
 
 			$result = $db->query("SELECT * FROM User_Details WHERE id=$id")
 				or die ($db->error . ' invalid query');
