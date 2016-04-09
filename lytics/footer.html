@@ -3,7 +3,17 @@
 		<ul>
 			<li><a href="index.php">Home</a></li>
 			<li><a href="about_us.php">About Us</a></li>
-			<li><a href="sign_up.php">Sign Up</a></li>
+			<?php  
+				if (!isset($_SESSION['first_name'])):
+			?>
+					<li><a href="sign_up.php">Sign Up</a></li>
+			<?php
+				else:
+			?>
+					<li><a href="logout.php">Logout</a></li>
+			<?php 
+				endif;
+			?>
 		</ul>
 	</nav>
 	<hr class="footer_sp"/>

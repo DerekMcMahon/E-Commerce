@@ -26,7 +26,32 @@
 	<section class="dashboard">
 		<div class="wrapper">
 
-			<h2>Hello, <?php echo $_SESSION['first_name']?></h2>
+		<h2>Hello, <?php echo $_SESSION['first_name']?></h2>
+
+		<br/>
+
+		<table>
+			<tr>
+				<td id="services">
+					<h3>Services</h3>
+						<ul id="links">
+							<li><a href="">Heat Map</a></li>
+							<li><a href="">Conversion Rate</a></li>
+							<li><a href="">Click Count</a></li>
+						</ul>
+					</div>
+				</td>
+				<td id="content">
+				there
+				</td>
+			</tr>
+		</table>
+
+<!-- 		<div id="user_info">
+			<span class="left">Hello, <?php echo $_SESSION['first_name']?></span>
+			<span class="space"></span>
+			<span class="right">Plan: <?php echo $_SESSION['plan_type']?></span>
+		</div> -->
 
 		</div>
 	</section>
