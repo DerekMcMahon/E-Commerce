@@ -47,9 +47,15 @@ h2 {
 	width: 500px;
 }
 
-h3 {
+#service_type {
+	text-align: center;
+	font-size: 24px;
+}
+
+#title {
 	font-family: 'LatoBold', arial;
 	margin: 10px 10px;
+	text-align: left;
 }
 
 #user_info {
@@ -73,27 +79,33 @@ table {
 #content {
 	border: 1px solid black;
 	width: 80%;
+	padding: 0;
+	position: relative;
 }
 
-#links {
-	margin: 20px 10px;
+#services ul {
+	margin: 0;
 }
 
-li {
-	margin: 10px 0;
+#services li {
+	padding: 10px 10px;
 	list-style: none;
+	cursor: pointer;
+	transition: all 0.25s;
 }
 
-a {
+#services li:hover {
+	background: #2ecc71;
+}
+
+#services a {
 	color: black;
-	font-family: 'LatoBold', Tahoma;
+	font-family: 'LatoRegular', Tahoma;
 	text-decoration: none;
 }
-/*/
-.left {
-	float:left;
+
+.selected {
+	background: #3498db;
+	color: white;
 }
 
-.right {
-	float:right;
-}*/

@@ -14,10 +14,12 @@
 
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/sign_up_confirm.css">
 	<link rel="stylesheet" type="text/css" href="css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="css/heat_map.css">
 
     <script type="text/javascript" src="js/jquery.js"></script>
+
+
 </head>
 
 <body>
@@ -27,31 +29,29 @@
 		<div class="wrapper">
 
 		<h2>Hello, <?php echo $_SESSION['first_name']?></h2>
+		<br/>
+		<h3 id="service_type">Heat Map</h3>
 
 		<br/>
 
 		<table>
 			<tr>
 				<td id="services">
-					<h3>Services</h3>
+					<h3 id="title">Services</h3>
 						<ul id="links">
-							<li><a href="">Heat Map</a></li>
-							<li><a href="">Conversion Rate</a></li>
-							<li><a href="">Click Count</a></li>
+							<a href="heat_map.php"><li class="selected">Heat Map</li></a>
+							<a href="conversion_rate.php"><li>Conversion Rate</li></a>
+							<a href="visitors.php"><li>Visitors</li></a>
 						</ul>
 					</div>
 				</td>
 				<td id="content">
-				there
+					<div>
+
+					</div>
 				</td>
 			</tr>
 		</table>
-
-<!-- 		<div id="user_info">
-			<span class="left">Hello, <?php echo $_SESSION['first_name']?></span>
-			<span class="space"></span>
-			<span class="right">Plan: <?php echo $_SESSION['plan_type']?></span>
-		</div> -->
 
 		</div>
 	</section>
