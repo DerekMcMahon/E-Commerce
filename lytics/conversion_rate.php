@@ -46,7 +46,11 @@
 					</div>
 				</td>
 				<td id="content">
-					<div>
+					<div id="container">
+					
+			            <div id="div1" class="radial_container"></div>
+			            <div id="div2" class="radial_container"></div>
+			            <div id="div3" class="radial_container"></div>
 
 					</div>
 				</td>
