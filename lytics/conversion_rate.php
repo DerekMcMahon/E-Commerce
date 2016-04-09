@@ -32,7 +32,7 @@
 
 		<h2>Hello, <?php echo $_SESSION['first_name']?></h2>
 		<br/>
-		<h3 id="service_type">Conversion Rate</h3>
+		<h3 id="service_type">Metrics</h3>
 
 		<br/>
 
