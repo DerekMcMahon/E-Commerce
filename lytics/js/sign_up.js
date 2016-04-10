@@ -246,37 +246,48 @@ function check_state_zip () {
 	var z_val = zip.value.trim();
 	var s_val = state.value;
 
+	var ret_val = true;
+
+	error.innerHTML = ""
+
 	if (z_val == "" || s_val == "") {
-		error.innerHTML = "please enter state/zip code";
+		error.innerHTML = "please enter state/zip code<br/>";
 		if (z_val == "")
 			zip.style.borderLeft = RED_BORDER;
 		else
 			zip.style.borderLeft = GREEN_BORDER;
+
 		if (s_val == "")
 			state.style.borderLeft = RED_BORDER;
 		else
 			state.style.borderLeft = GREEN_BORDER;
-		return false;
+
+		ret_val = false;
 	} else {
-
 		state.style.borderLeft = GREEN_BORDER;
+		ret_val = true;
+	}
 
+	if (z_val != "") {
 		var z_re = /^[0-9]{5}$/;
 		var z_check = z_re.test(z_val);	
 
 		if (!z_check) {
-			error.innerHTML = "invalid zip code";
+			error.innerHTML += "invalid zip code";
 			zip.style.borderLeft = RED_BORDER;
-			return false;
+			ret_val = false;
 		} else {
 			zip.style.borderLeft = GREEN_BORDER;
+			ret_val = (ret_val && ret_val);
 		}
-
-
-		error.innerHTML = "";
-		return true;
-
 	}
+
+	// Clear error if the value was okay
+	if (ret_val) {
+		error.innerHTML = "";
+	}
+
+	return ret_val;
 }
 
 /*

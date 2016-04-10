@@ -162,7 +162,7 @@
 							</select>
 						</td>
 						<td colspan="2">
-							<input type="text" class="label" name="zip_code" placeholder="zip code">
+							<input type="text" class="label" name="zip_code" placeholder="zip code" maxlength="5">
 						</td>
 						<td>
 							<div id="state_zip_error" class="error"></div>

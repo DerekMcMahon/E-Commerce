@@ -25,7 +25,12 @@
 		<?php include("header.html") ?>
 
 		<section class="caption">
-			<p class="cap_title">Analytics for All</p>
+			<p class="cap_title">
+				Analytics for All<br/>
+			</p>
+			<span class="cap_sub_title">
+				Lytics helps businesses consolidate metrics about user data in a single, accessible space.
+			</span>
 		</section>
 		
 	</section><!-- Billboard End -->

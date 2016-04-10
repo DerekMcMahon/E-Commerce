@@ -134,10 +134,10 @@
 					<section class="split-content-container">
 						<div class="split-content-row">
 							<div class="split-content-cell">
-								Total Visitors
+								Total Visitors (past 30 days)
 							</div>
 							<div class="split-content-cell">
-								New Visitors
+								New Visitors (past 30 days)
 							</div>
 						</div>
 						<div class="split-content-row">
